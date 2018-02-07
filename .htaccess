@@ -1,0 +1,23 @@
+#Empêche le listage de l'ensemble des fichiers si l'index n'est pas présent
+Options -Indexes
+
+# Pour suivre les liens symboliques
+Options +FollowSymlinks
+
+# Active la réécriture d'URL
+RewriteEngine On
+
+# Réécriture URL à un paramètre
+RewriteRule ^([a-z]+)$ ?page=$1 [L]
+
+# Réécriture URL à deux paramètres
+RewriteRule ^([a-z]+)-([a-z]+)$ ?page=$1-$2 [L]
+
+# Réécriture URL à deux paramètres et une pagination
+RewriteRule ^([a-z]+)-([a-z]+)-([0-9]+)$ ?page=$1-$2&pagination=$3 [L]
+
+# Réécriture URL à deux paramètres et un id
+RewriteRule ^([a-z]+)-([a-z]+)-id-([0-9]+)$ ?page=$1-$2&id=$3 [L]
+
+# Réécriture URL à trois paramètres
+RewriteRule ^([a-z]+)-([a-z]+)-([a-z]+)$ ?page=$1-$2-$3 [L]
