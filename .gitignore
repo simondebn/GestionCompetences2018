@@ -7,3 +7,7 @@
 *.iml
 out
 gen
+
+
+# accès base de données
+db.php
