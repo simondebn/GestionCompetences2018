@@ -5,7 +5,7 @@
 
         <h5 class="animated bounceInUp mb-3">2018</h5>
 
-        <p class="animated bounceInUp text-muted">Wittgenstein Team</p>
+        <p class="animated bounceInUp text-muted">Wittgenstein Team 2</p>
     </div>
 </div>
 
