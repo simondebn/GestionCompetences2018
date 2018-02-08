@@ -14,9 +14,9 @@ function debug($arr){
  */
 function render($view, $params){
     extract($params);
-    include 'app/view/header.php';
+    include 'app/view/inc/header.php';
     include 'app/view/' . $view . '.php';
-    include 'app/view/footer.php';
+    include 'app/view/inc/footer.php';
 }
 
 /**
