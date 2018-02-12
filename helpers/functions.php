@@ -15,8 +15,16 @@ function debug($arr){
 function render($view, $params){
     extract($params);
     include 'app/view/inc/header.php';
+    include 'app/view/inc/menu.php';
     include 'app/view/' . $view . '.php';
     include 'app/view/inc/footer.php';
+}
+
+function renderConnexion($view, $params){
+    extract($params);
+    include 'app/view/inc/header.php';
+    include 'app/view/' . $view . '.php';
+    include 'app/view/inc/footerConnexion.php';
 }
 
 /**
