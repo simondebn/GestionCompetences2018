@@ -10,6 +10,18 @@ if(isset($_POST['myParams'])){
 
 /*** GESTION DES COMPETENCES ***/
 
+/*** récupérer une compétence ***/
+function getOneCompetence($id, $compModelDB)
+{
+    return $compModelDB->getOne($id);
+}
+
+/*** récupérer toutes les compétences ***/
+function getAllCompetence($id, $compModelDB)
+{
+    return $compModelDB->getAll($id);
+}
+
 /*** Ajout d'une compétence ***/
 function addCompetence($params, $compModelDb)
 {
