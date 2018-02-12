@@ -12,8 +12,10 @@ include 'helpers/functions.php';
 include 'app/config/routes.php';
 include 'app/config/db.php';
 include 'app/model/personneModelDb.php';
+include 'app/model/compModelDb.php';
 
 $personneModelDb = new personneModelDb($db);
+$compModelDb = new compModelDb($db);
 
 $page = DEFAULT_PAGE;
 
