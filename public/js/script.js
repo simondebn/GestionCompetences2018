@@ -56,3 +56,18 @@ new autoComplete({
 $('body').on('submit', '#form_search', function (e) {
     e.preventDefault();
 });
+
+$('body').on('click', '#deconnexion', function (e) {
+    $.ajax({
+        url: "home",
+        type: 'POST',
+        data:
+            {
+                myFunction: 'deconnexion'
+            },
+        success: function (data) {
+            window.location.href = 'home';
+        }
+    });
+
+});
