@@ -27,12 +27,40 @@
                 <td>Larry</td>
                 <td>the Bird</td>
                 <td><a href="" class="badge badge-cefim">PHP</a><a href="" class="badge badge-cefim">HTML</a><a href="" class="badge badge-cefim">CSS</a></td>
+            </tr>            <tr>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td><a href="" class="badge badge-cefim">PHP</a><a href="" class="badge badge-cefim">HTML</a><a href="" class="badge badge-cefim">CSS</a></td>
+            </tr>            <tr>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td><a href="" class="badge badge-cefim">PHP</a><a href="" class="badge badge-cefim">HTML</a><a href="" class="badge badge-cefim">CSS</a></td>
+            </tr>            <tr>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td><a href="" class="badge badge-cefim">PHP</a><a href="" class="badge badge-cefim">HTML</a><a href="" class="badge badge-cefim">CSS</a></td>
+            </tr>            <tr>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td><a href="" class="badge badge-cefim">PHP</a><a href="" class="badge badge-cefim">HTML</a><a href="" class="badge badge-cefim">CSS</a></td>
+            </tr>            <tr>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td><a href="" class="badge badge-cefim">PHP</a><a href="" class="badge badge-cefim">HTML</a><a href="" class="badge badge-cefim">CSS</a></td>
+            </tr>            <tr>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td><a href="" class="badge badge-cefim">PHP</a><a href="" class="badge badge-cefim">HTML</a><a href="" class="badge badge-cefim">CSS</a></td>
+            </tr>            <tr>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td><a href="" class="badge badge-cefim">PHP</a><a href="" class="badge badge-cefim">HTML</a><a href="" class="badge badge-cefim">CSS</a></td>
             </tr>
             </tbody>
         </table>
 
     </div>
-    <div class="col-md-4" data-spy="affix" data-offset-top="100">
+    <div class="col-md-4" data-spy="affix" data-offset-top="100" data-offset-bottom="150">
         <div id="map"></div>
     </div>
 </div>

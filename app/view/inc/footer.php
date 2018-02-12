@@ -26,12 +26,36 @@
 
 </body>
 <!--Footer-->
-<footer class="page-footer blue center-on-small-only">
+<footer class="page-footer footer-color center-on-small-only">
+
+    <!--Footer Links-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6" style="margin-bottom: 2%">
+                <h5 class="title">Tags</h5>
+                <a href="" class="badge badge-cefim">Bootstrap</a>
+                <a href="" class="badge badge-cefim">Angular</a>
+                <a href="" class="badge badge-cefim">PHP</a>
+                <a href="" class="badge badge-cefim">HTML</a>
+                <a href="" class="badge badge-cefim">CSS</a>
+                <a href="" class="badge badge-cefim">Bootstrap</a>
+                <a href="" class="badge badge-cefim">Angular</a>
+                <a href="" class="badge badge-cefim">PHP</a>
+                <a href="" class="badge badge-cefim">HTML</a>
+                <a href="" class="badge badge-cefim">CSS</a>
+                <a href="" class="badge badge-cefim">Bootstrap</a>
+                <a href="" class="badge badge-cefim">Angular</a>
+                <a href="" class="badge badge-cefim">PHP</a>
+                <a href="" class="badge badge-cefim">HTML</a>
+                <a href="" class="badge badge-cefim">CSS</a>
+            </div>
+        </div>
+    </div>
 
     <!--Copyright-->
     <div class="footer-copyright">
         <div class="container-fluid">
-            © 2015 Copyright: <a href="https://www.MDBootstrap.com"> MDBootstrap.com </a>
+            © 2018 Copyright: <a href="https://www.cefim.eu"> Wittgenstein</a>
 
         </div>
     </div>

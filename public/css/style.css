@@ -19,7 +19,7 @@ input[type=date]:focus:not([readonly])+label, input[type=datetime-local]:focus:n
 }
 
 #map {
-    height:75vh; !important;
+    height:50vh; !important;
 }
 
 @media (min-width: 768px) {
@@ -32,17 +32,32 @@ input[type=date]:focus:not([readonly])+label, input[type=datetime-local]:focus:n
     }
 }
 
-.badge-cefim{
+table .badge-cefim{
     background-color: #E1ECF4;
     margin-right:2% !important;
 }
-.badge-cefim:hover{
+
+table .badge-cefim:hover{
     background-color: #cbe0ee;
 }
+
+.badge-cefim{
+    background-color: #464b4f;
+    margin-right:2% !important;
+}
+
+.badge-cefim:hover{
+    background-color: #62686e;
+}
+
 .badge{
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.16), 0 2px 5px 0 rgba(0,0,0,.12)
 }
 
 table.table a{
     color:#2D6991; !important;
+}
+
+.footer-color{
+    background-color: #242424;
 }
