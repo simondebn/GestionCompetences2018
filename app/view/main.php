@@ -1,7 +1,11 @@
 <!--Main Layout-->
 <main class="py-5">
 
-<div class="row mt-3 pt-3">
+    <?php if(isset($_SESSION['compte_admin']) && $_SESSION['compte_admin']): ?>
+        <div id="is_admin" class="hide"></div>
+    <?php endif; ?>
+
+    <div class="row mt-3 pt-3">
     <div class="col-md-8">
 
         <table class="table">
@@ -64,6 +68,11 @@
         <div id="map"></div>
     </div>
 </div>
+
+    <div class="modal fade form" role="dialog" aria-labelledby="test" aria-hidden="true">
+        <div class="modal-dialog modal-lg"></div>
+    </div>
+
 
 </main>
 <!--Main Layout-->

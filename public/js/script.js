@@ -53,7 +53,7 @@ new autoComplete({
     }
 });
 
-$('body').on('submit', '#form_search', function (e) {
+$('body').on('submit', '#form_search, #formPersonne', function (e) {
     e.preventDefault();
 });
 
