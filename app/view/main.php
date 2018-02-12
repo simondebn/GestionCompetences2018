@@ -1,9 +1,7 @@
 <!--Main Layout-->
 <main class="py-5">
-
 <div class="row mt-3 pt-3">
     <div class="col-md-8">
-
         <table class="table">
             <thead>
             <tr>
