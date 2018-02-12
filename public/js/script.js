@@ -32,3 +32,27 @@ $('body').on('click', '#connexion', function (e) {
     });
 
 });
+
+new autoComplete({
+    selector: 'input#search',
+    source: function(term, response){
+        $.ajax({
+            url: 'main',
+            type: 'POST',
+            data:
+                {
+                    myFunction: 'autoCompleteCompetence',
+                    search: term
+                },
+            success: function (data) {
+                console.log(data);
+                var json = $.parseJSON(data);
+                response(json);
+            }
+        });
+    }
+});
+
+$('body').on('submit', '#form_search', function (e) {
+    e.preventDefault();
+});

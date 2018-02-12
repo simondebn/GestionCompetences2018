@@ -18,6 +18,8 @@ if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'checkConnexion') {
     }
 } elseif (isset($_POST['myFunction']) && $_POST['myFunction'] === 'getAllLocations') {
     echo json_encode($personneModelDb->getAll());
+} elseif (isset($_POST['myFunction']) && $_POST['myFunction'] === 'autoCompleteCompetence') {
+    echo json_encode($compModelDb->getRecherche($_POST['search']));
 } elseif (isset($_POST['myFunction']) && $_POST['myFunction'] === '...') {
 } else {
     $allPersonnes = $personneModelDb->getAll();

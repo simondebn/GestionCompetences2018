@@ -8,8 +8,8 @@
 
         <div class="collapse navbar-collapse ml-lg-5" id="navbarSupportedContent">
             <!-- Search form -->
-            <form class="form-inline md-form mr-auto mb-0">
-                <input class="form-control w-75 mr-3" type="text" placeholder="Rechercher" aria-label="Search">
+            <form class="form-inline md-form mr-auto mb-0" id="form_search">
+                <input class="form-control w-75 mr-3" type="text" placeholder="Rechercher" aria-label="Search" id="search">
                 <i class="fa fa-search text-white" aria-hidden="true"></i>
             </form>
             <ul class="navbar-nav">

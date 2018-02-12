@@ -17,7 +17,8 @@
 <!-- Google Maps API Javascript -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD81_FT1orBqGjrKUoq6H9LFIEvyZfiXOU&callback=initMap"
         async defer></script>
-
+<!-- auto-complete  -->
+<script type="text/javascript" src="public/js/auto-complete.min.js"></script>
 
 
 

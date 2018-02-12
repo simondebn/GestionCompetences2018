@@ -12,6 +12,8 @@
     <link href="public/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="public/css/mdb.min.css" rel="stylesheet">
+    <!-- Auto Complete -->
+    <link href="public/css/auto-complete.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="public/css/style.css" rel="stylesheet">
 </head>
