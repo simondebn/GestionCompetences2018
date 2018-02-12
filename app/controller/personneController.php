@@ -10,6 +10,24 @@ if(isset($_POST['myParams'])){
 
 /*** GESTION DES PERSONNES ***/
 
+/*** Récupérer un profil ***/
+
+function getOnePersonne($id, $personneModelDb)
+{
+    return $personneModelDb->getOne($id);
+}
+
+/*** Récupérer tous les profils ***/
+function getAllPersonne($personneModelDb){
+    return $personneModelDb->getAll();
+}
+
+/*** Récuperer un profil par email ***/
+
+function getFromEmailPersonne($email, $personneModelDb){
+    return $personneModelDb->getFromEmail($email);
+}
+
 /*** Ajout d'une personne ***/
 function addPersonne($params, $personneModelDb)
 {
