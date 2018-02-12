@@ -1,5 +1,5 @@
 <?php
 
-render('home', [
-    'title' => 'Accueil',
+renderConnexion('home', [
+    'title' => 'Connexion',
 ]) ;

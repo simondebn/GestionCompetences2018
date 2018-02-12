@@ -6,3 +6,30 @@ input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([re
 input[type=date]:focus:not([readonly])+label, input[type=datetime-local]:focus:not([readonly])+label, input[type=email]:focus:not([readonly])+label, input[type=number]:focus:not([readonly])+label, input[type=password]:focus:not([readonly])+label, input[type=search-md]:focus:not([readonly])+label, input[type=search]:focus:not([readonly])+label, input[type=tel]:focus:not([readonly])+label, input[type=text]:focus:not([readonly])+label, input[type=time]:focus:not([readonly])+label, input[type=url]:focus:not([readonly])+label, textarea.md-textarea:focus:not([readonly])+label{
     color: #f57c00; !important;
 }
+
+.bg-cefim {
+    background-color: #f57c00 !important; }
+
+.navbar.navbar-dark form input[type=text]:focus:not([readonly]){
+    border-color:#fff; !important;
+}
+
+.hide {
+    display: none;
+}
+
+#map {
+    height:75vh; !important;
+}
+
+@media (min-width: 768px) {
+    .affix {
+        left: 0; !important;
+        margin: 0 0 0 64%; !important;
+        position: fixed; !important;
+        right: 0;!important;
+        width: auto; !important;
+        -webkit-transition: width 2s;
+
+    }
+}
