@@ -8,7 +8,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse ml-lg-5" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse ml-lg-perso" id="navbarSupportedContent">
                 <!-- Search form -->
                 <form class="form-inline md-form mr-auto mb-0" id="form_search">
                     <input class="form-control w-75 mr-3" type="text" placeholder="Rechercher" aria-label="Search" id="search">
