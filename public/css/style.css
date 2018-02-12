@@ -14,9 +14,14 @@ input[type=date]:focus:not([readonly])+label, input[type=datetime-local]:focus:n
     border-color:#fff; !important;
 }
 
+.hide {
+    display: none;
+}
+
 #map {
     height:75vh; !important;
 }
+
 @media (min-width: 768px) {
     .affix {
         left: 0; !important;

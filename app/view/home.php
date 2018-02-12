@@ -13,23 +13,23 @@
 <div class="row justify-content-center" style="margin-top:50px">
     <div class="col-md-4">
         <!-- Form login -->
-        <form class="animated bounceInUp" action="#">
+        <form class="animated bounceInUp" action="#" id="formConnexion">
 
             <div class="md-form">
                 <i class="fa fa-envelope prefix grey-text"></i>
-                <input type="text" id="homeEmail" class="form-control">
-                <label for="homeEmail">e-mail</label>
+                <input type="email" id="email" name="email" class="form-control" value="jllebars@cefim.eu">
+                <label for="email">e-mail</label>
             </div>
 
             <div class="md-form">
                 <i class="fa fa-lock prefix grey-text"></i>
-                <input type="password" id="homePass" class="form-control">
-                <label for="homePass">mot de passe</label>
+                <input type="password" id="password" name="password" class="form-control" value="dadfba16">
+                <label for="password">mot de passe</label>
                 <p class="font-small blue-text d-flex justify-content-end"><a href="#" class="blue-text ml-1"> Un trou de mémoire?</a></p>
             </div>
 
             <div class="text-center">
-                <button class="btn btn-elegant">Se connecter</button>
+                <button class="btn btn-elegant" id="connexion">Se connecter</button>
             </div>
         </form>
         <!-- Form login -->

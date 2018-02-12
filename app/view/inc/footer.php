@@ -12,6 +12,16 @@
 <script type="text/javascript" src="public/js/list.js"></script>
 <!-- Affix.js -->
 <script type="text/javascript" src="public/js/affix.js"></script>
+<!-- markerclusterer.js -->
+<script type="text/javascript" src="public/js/markerclusterer.js"></script>
+<!-- Google Maps API Javascript -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD81_FT1orBqGjrKUoq6H9LFIEvyZfiXOU&callback=initMap"
+        async defer></script>
+
+
+
+
+<script type="text/javascript" src="public/js/googleMaps.js"></script>
 <script type="text/javascript" src="public/js/script.js"></script>
 
 </body>

@@ -23,8 +23,16 @@ class personneModelDb
         return $stmt->fetch();
     }
 
+    public function getFromEmail($email){
+        $stmt = $this->db->prepare("SELECT * FROM personne WHERE email = :email");
+        $stmt->execute([
+            'email' => $email
+        ]);
+        return $stmt->fetch();
+    }
+
     public function getAll() {
-        $stmt = $this->db->prepare("SELECT * FROM personne WHERE compte_admin = 0 AND active = 1");
+        $stmt = $this->db->prepare("SELECT * FROM personne WHERE active = 1");
         $stmt->execute();
 
         $personnes = [];

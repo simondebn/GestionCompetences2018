@@ -11,6 +11,9 @@ session_start();
 include 'helpers/functions.php';
 include 'app/config/routes.php';
 include 'app/config/db.php';
+include 'app/model/personneModelDb.php';
+
+$personneModelDb = new personneModelDb($db);
 
 $page = DEFAULT_PAGE;
 
