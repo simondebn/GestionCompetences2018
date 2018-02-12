@@ -27,9 +27,22 @@ input[type=date]:focus:not([readonly])+label, input[type=datetime-local]:focus:n
         left: 0; !important;
         margin: 0 0 0 64%; !important;
         position: fixed; !important;
-        right: 0;!important;
+        right: 138px;!important;
         width: auto; !important;
-        -webkit-transition: width 2s;
-
     }
+}
+
+.badge-cefim{
+    background-color: #E1ECF4;
+    margin-right:2% !important;
+}
+.badge-cefim:hover{
+    background-color: #cbe0ee;
+}
+.badge{
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.16), 0 2px 5px 0 rgba(0,0,0,.12)
+}
+
+table.table a{
+    color:#2D6991; !important;
 }
