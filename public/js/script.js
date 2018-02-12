@@ -33,10 +33,12 @@ $('body').on('click', '#connexion', function (e) {
 
 });
 
+var competence_autocomplete;
 new autoComplete({
     selector: 'input#search',
     source: function(term, response){
-        $.ajax({
+        try { competence_autocomplete.abort(); } catch(e){}
+        competence_autocomplete = $.ajax({
             url: 'main',
             type: 'POST',
             data:

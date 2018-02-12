@@ -1,8 +1,10 @@
 function addAutoComplete() {
+    var ville_autocomplete;
     new autoComplete({
         selector: 'input#ville_entreprise',
         source: function(term, response){
-            $.ajax({
+            try { ville_autocomplete.abort(); } catch(e){}
+            ville_autocomplete = $.ajax({
                 url: 'https://maps.googleapis.com/maps/api/geocode/json?key='+ GOOGLE_API_KEY_GEOCODING +'&region=fr&address=' + term,
                 type: 'POST',
                 success: function (data) {
