@@ -67,3 +67,7 @@ table.table a{
         margin-left: 4.2rem !important;
     }
 }
+
+label {
+    padding-left: 15px;
+}

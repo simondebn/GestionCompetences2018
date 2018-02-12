@@ -20,13 +20,13 @@
                             <a class="nav-link waves-effect waves-light" href="#">Liste des compétences</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link waves-effect waves-light" href="#">Ajouter un utilisateur</a>
+                            <a class="nav-link waves-effect waves-light" href="#" id="addPersonne">Ajouter un utilisateur</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link waves-effect waves-light" href="#">Import csv</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link waves-effect waves-light" href="#">Modifier son profil</a>
+                            <a class="nav-link waves-effect waves-light" href="#" id="modifyPersonne">Modifier son profil</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link waves-effect waves-light" href="#" id="deconnexion">Déconnexion</a>
@@ -34,7 +34,7 @@
                     <?php endif; ?>
                     <?php if(isset($_SESSION['compte_admin']) && ! $_SESSION['compte_admin']): ?>
                         <li class="nav-item active">
-                            <a class="nav-link waves-effect waves-light" href="#">Modifier son profil</a>
+                            <a class="nav-link waves-effect waves-light" href="#" id="modifyPersonne">Modifier son profil</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link waves-effect waves-light" href="#" id="deconnexion">Déconnexion</a>
