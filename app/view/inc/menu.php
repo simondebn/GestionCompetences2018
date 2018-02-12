@@ -10,7 +10,7 @@
 
             <div class="collapse navbar-collapse ml-lg-perso" id="navbarSupportedContent">
                 <!-- Search form -->
-                <form class="form-inline md-form mr-auto mb-0" id="form_search">
+                <form class="form-inline md-form mr-auto mb-1" id="form_search">
                     <input class="form-control w-75 mr-3" type="text" placeholder="Rechercher" aria-label="Search" id="search">
                     <i class="fa fa-search text-white" aria-hidden="true"></i>
                 </form>
