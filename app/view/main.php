@@ -1,15 +1,10 @@
 <!--Main Layout-->
 <main class="py-5">
-<<<<<<< HEAD
-<div class="row mt-3 pt-3" >
-=======
-
     <?php if(isset($_SESSION['compte_admin']) && $_SESSION['compte_admin']): ?>
         <div id="is_admin" class="hide"></div>
     <?php endif; ?>
 
     <div class="row mt-3 pt-3">
->>>>>>> a250dda6fe1af7b52bd520205383d50a10ae91ea
     <div class="col-md-8">
         <table class="table"id="users">
             <thead>
