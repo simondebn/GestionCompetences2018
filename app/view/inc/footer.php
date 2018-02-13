@@ -27,7 +27,7 @@
 
 </body>
 <!--Footer-->
-<footer class="page-footer footer-color center-on-small-only sticky">
+<footer class="page-footer footer-color center-on-small-only">
 
     <!--Footer Links-->
     <div class="container">
