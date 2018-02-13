@@ -9,8 +9,8 @@
         <table class="table"id="users">
             <thead>
             <tr>
-                <th class="sort" data-sort="nom">Nom</th>
-                <th class="sort" data-sort="prenom">Prénom</th>
+                <th class="sort" data-sort="nom" style="min-width: 10vw">Nom</th>
+                <th class="sort" data-sort="prenom" style="min-width: 10vw">Prénom</th>
                 <th>Compétence(s)</th>
             </tr>
             </thead>
