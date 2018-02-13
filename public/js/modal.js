@@ -59,7 +59,7 @@ $('body').on('click', '#modifyPersonne', function () {
     $('.modal.form').modal('show');
 });
 
-$('body').on('click', 'tr', function () {
+$('body').on('click', 'tr td:not(:last-child)', function () {
     var data = {
         contexte: 'consultation',
         modal_title: 'Consultation'

@@ -71,3 +71,7 @@ table.table a{
 label {
     padding-left: 15px;
 }
+
+table.table tr{
+    cursor:pointer; !important;
+}
