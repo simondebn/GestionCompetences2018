@@ -12,6 +12,9 @@
 <script type="text/javascript" src="public/js/list.js"></script>
 <!-- Affix.js -->
 <script type="text/javascript" src="public/js/affix.js"></script>
+<!-- auto-complete  -->
+<script type="text/javascript" src="public/js/auto-complete.min.js"></script>
+
 <script type="text/javascript" src="public/js/script.js"></script>
 
 </body>

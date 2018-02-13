@@ -37,11 +37,17 @@ class compModelDb
     }
 
     public function getRecherche($string){
-        $stmt = $this->db->prepare("SELECT * FROM competence WHERE nom = :string AND actif = 1");
+        // quand le champ actif sera sur la table competence :
+        //$stmt = $this->db->prepare("SELECT * FROM competence WHERE nom LIKE :string AND actif = 1");
+        $stmt = $this->db->prepare("SELECT * FROM competence WHERE nom LIKE :string");
         $stmt->execute([
             'string' => '%'.$string.'%'
         ]);
-        return $stmt->fetch();
+        $competences = [];
+        foreach ($stmt as $c) {
+            $competences[] = $c['nom'];
+        }
+        return $competences;
     }
     
     public function add($newComp) {

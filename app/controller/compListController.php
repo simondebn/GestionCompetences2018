@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by Netbeans.
- * User: cdi
- * Date: 09/02/2018
- * Time: 11:40
- */
 
 $competences = $compModelDb->getAll();
 

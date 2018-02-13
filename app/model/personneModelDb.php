@@ -41,7 +41,20 @@ class personneModelDb
         }
         return $personnes;
     }
-
+    
+    public function getCompetences($id){
+        $stmt = $this->db->prepare("SELECT competence.nom FROM lien_personne_comptence 
+                        LEFT JOIN competence ON competence.id = id_competence WHERE id_personne = :id");
+        $stmt->execute([
+            'id' => $id
+        ]);
+        $skills = [];
+        foreach ($stmt as $p) {
+            $skills[] = $p['nom'];
+        }
+        return $skills;
+    }
+    
     public function add($newPersonne) {
         $request = ("INSERT INTO personne (nom, prenom, email, telephone, description_competences, nom_entreprise, ville_entreprise, description_projets, password, active, compte_admin)  VALUES (:nom, :prenom, :email, :telephone, :description_competences, :nom_entreprise, :ville_entreprise, :description_projets, :password, 1, 0)");
         $stmt = $this->db->prepare($request);

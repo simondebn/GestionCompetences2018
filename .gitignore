@@ -11,3 +11,6 @@ gen
 
 # accès base de données
 db.php
+
+# NetBeans project files
+nbproject

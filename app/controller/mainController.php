@@ -1,6 +1,17 @@
 <?php
 
-if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'checkConnexion') {
+$personnes = $personneModelDb->getAll();
+
+$users = [];
+$skills = [];
+
+foreach ($personnes as $personne){
+        $skills = $personneModelDb->getCompetences($personne['id']);
+        $users[] = [ 'prenom' => $personne['prenom'], 'nom' => $personne['nom'], 'skills' => $skills];
+}
+
+
+if (isset($_POST['myFunction']) && isset($_POST['myFunction']) && $_POST['myFunction'] === 'checkConnexion') {
     if ($personneModelDb->checkPassword($_POST['myParams']['params']['email'], $_POST['myParams']['params']['password'])) {
         $user = $personneModelDb->getFromEmail($_POST['myParams']['params']['email']);
         $_SESSION['user_id'] = $user['id'];
@@ -16,22 +27,19 @@ if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'checkConnexion') {
             'msg' => 'Une erreur est survenue !'
         ));
     }
-} elseif (isset($_POST['myFunction']) && $_POST['myFunction'] === 'getAllLocations') {
-    echo json_encode($personneModelDb->getAll());
-} elseif (isset($_POST['myFunction']) && $_POST['myFunction'] === '...') {
-} else {
-    $allPersonnes = $personneModelDb->getAll();
-
-    $listePersonnes = [];
-
-    foreach ($allPersonnes as $personne){
-        $listePersonnes[] = $personne;
-    }
-
+} elseif (isset($_POST['myFunction']) && isset($_POST['myFunction']) && $_POST['myFunction'] === 'getAllLocations') {
+    echo json_encode($personnes);
+} elseif (isset($_POST['myFunction']) && isset($_POST['myFunction']) && $_POST['myFunction'] === 'autoCompleteCompetence') {
+    echo json_encode($compModelDb->getRecherche($_POST['search']));
+} elseif (isset($_POST['myFunction']) && isset($_POST['myFunction']) && $_POST['myFunction'] === '...') {
+} elseif (isset($_SESSION['user_id'])) {
     render('main', [
         'title'   => 'Accueil',
-        'listePersonne'   => $listePersonnes,
+        'users'   => $users
     ]);
-
+} else {
+    renderConnexion('home', [
+        'title' => 'Connexion',
+    ]) ;
 }
 

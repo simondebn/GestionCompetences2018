@@ -17,6 +17,11 @@ function getOnePersonne($id, $personneModelDb)
     return $personneModelDb->getOne($id);
 }
 
+/*** récupérer les compétences d'un profil ***/
+function getPersonneSkills($id, $personneModelDb){
+    return $personneModelDb->getPersonneCompetences($id);
+}
+
 /*** Récupérer tous les profils ***/
 function getAllPersonne($personneModelDb){
     return $personneModelDb->getAll();

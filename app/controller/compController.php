@@ -17,9 +17,9 @@ function getOneCompetence($id, $compModelDB)
 }
 
 /*** récupérer toutes les compétences ***/
-function getAllCompetence($id, $compModelDB)
+function getAllCompetence($compModelDB)
 {
-    return $compModelDB->getAll($id);
+    return $compModelDB->getAll();
 }
 
 /*** Ajout d'une compétence ***/
