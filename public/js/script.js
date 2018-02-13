@@ -33,10 +33,12 @@ $('body').on('click', '#connexion', function (e) {
 
 });
 
+var competence_autocomplete;
 new autoComplete({
     selector: 'input#search',
     source: function(term, response){
-        $.ajax({
+        try { competence_autocomplete.abort(); } catch(e){}
+        competence_autocomplete = $.ajax({
             url: 'main',
             type: 'POST',
             data:
@@ -53,7 +55,7 @@ new autoComplete({
     }
 });
 
-$('body').on('submit', '#form_search', function (e) {
+$('body').on('submit', '#form_search, #formPersonne', function (e) {
     e.preventDefault();
 });
 
@@ -73,8 +75,9 @@ $('body').on('click', '#deconnexion', function (e) {
 });
 
 /***********Scripts Listes***************/
+var options = {
+  valueNames: [ 'nom', 'prenom' ]
+};
 
-$('body').on('click','#add-user', function() {
-
-});
+var userList = new List('users', options);
 /*********************************/

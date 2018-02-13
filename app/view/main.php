@@ -1,18 +1,26 @@
 <!--Main Layout-->
 <main class="py-5">
+<<<<<<< HEAD
 <div class="row mt-3 pt-3" >
+=======
+
+    <?php if(isset($_SESSION['compte_admin']) && $_SESSION['compte_admin']): ?>
+        <div id="is_admin" class="hide"></div>
+    <?php endif; ?>
+
+    <div class="row mt-3 pt-3">
+>>>>>>> a250dda6fe1af7b52bd520205383d50a10ae91ea
     <div class="col-md-8">
         <table class="table"id="users">
             <thead>
             <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
+                <th class="sort" data-sort="nom">Nom</th>
+                <th class="sort" data-sort="prenom">Prénom</th>
                 <th>Compétence(s)</th>
             </tr>
             </thead>
             <tbody class="list">
             <?php 
-             debug($users);
                 foreach($users as $user){
                     
                     $skills = $user['skills'];
@@ -32,6 +40,11 @@
         <div id="map"></div>
     </div>
 </div>
+
+    <div class="modal fade form" role="dialog" aria-labelledby="test" aria-hidden="true">
+        <div class="modal-dialog modal-lg"></div>
+    </div>
+
 
 </main>
 <!--Main Layout-->

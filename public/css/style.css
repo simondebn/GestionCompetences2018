@@ -61,3 +61,17 @@ table.table a{
 .footer-color{
     background-color: #242424;
 }
+
+@media (min-width: 992px) {
+    .ml-lg-perso {
+        margin-left: 4.2rem !important;
+    }
+}
+
+label {
+    padding-left: 15px;
+}
+
+table.table tr{
+    cursor:pointer; !important;
+}
