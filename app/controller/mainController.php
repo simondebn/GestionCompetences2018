@@ -1,13 +1,14 @@
 <?php
 
 $personnes = $personneModelDb->getAll();
+$competences = $compModelDb->getAll();
 
 $users = [];
-$skills = [];
+$table_skills = [];
 
 foreach ($personnes as $personne){
-        $skills = $personneModelDb->getCompetences($personne['id']);
-        $users[] = [ 'prenom' => $personne['prenom'], 'nom' => $personne['nom'], 'skills' => $skills];
+        $table_skills = $personneModelDb->getCompetences($personne['id']);
+        $users[] = [ 'prenom' => $personne['prenom'], 'nom' => $personne['nom'], 'skills' => $table_skills];
 }
 
 
@@ -35,7 +36,9 @@ if (isset($_POST['myFunction']) && isset($_POST['myFunction']) && $_POST['myFunc
 } elseif (isset($_SESSION['user_id'])) {
     render('main', [
         'title'   => 'Accueil',
-        'users'   => $users
+        'users'   => $users,
+        'tags' => $competences
+        
     ]);
 } else {
     renderConnexion('home', [

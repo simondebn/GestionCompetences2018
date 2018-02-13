@@ -17,13 +17,12 @@
             <tbody class="list">
             <?php 
                 foreach($users as $user){
-                    
-                    $skills = $user['skills'];
+                    $user_skills = $user['skills'];
                     echo '<tr><td class="nom">'.$user['nom'].'</td>';
                     echo '<td class="prenom">'.$user['prenom'].'</td>';
                     echo '<td class="competences">';
-                    foreach($skills as $skill){
-                        echo '<a href="" class="badge badge-cefim">'.$skill.'</a>'; 
+                    foreach($user_skills as $user_skill){
+                        echo '<a href="" class="badge badge-cefim">'.$user_skill.'</a>'; 
                     }
                     echo '</td></tr>';
                 }             

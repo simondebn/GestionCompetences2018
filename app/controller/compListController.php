@@ -1,9 +1,8 @@
 <?php
 
-$competences = $compModelDb->getAll();
+//$competences = $compModelDb->getAll();
 
-render('testVue', [
-    'title'   => 'Liste des compétences',
-    'skills'   => $competences
+render('toto', [
+    //'title'   => 'Liste des compétences',
+    //'skills'   => $competences
 ]);
-
