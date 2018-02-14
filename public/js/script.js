@@ -25,8 +25,10 @@ $('body').on('click', '#connexion', function (e) {
         params[value.name] = value.value;
     });
 
+    console.log(params);
+
     $.ajax({
-        url: "main",
+        url: "connexion",
         type: 'POST',
         data:
             {
@@ -36,6 +38,7 @@ $('body').on('click', '#connexion', function (e) {
                 }
             },
         success: function (data) {
+            console.log(data);
             var msg = JSON.parse(data);
             if (msg.type == 'success') {
                 window.location.href = "main";
@@ -94,14 +97,14 @@ $('body').on('click', '#search_button', function (e) {
 
 $('body').on('click', '#deconnexion', function (e) {
     $.ajax({
-        url: "home",
+        url: "connexion",
         type: 'POST',
         data:
             {
                 myFunction: 'deconnexion'
             },
         success: function (data) {
-            window.location.href = 'home';
+            window.location.href = 'accueil';
         }
     });
 
