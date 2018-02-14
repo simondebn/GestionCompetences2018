@@ -3,9 +3,9 @@
 $competences = $compModelDb->getMostUsed();
 
 
-if (isset($_GET['recherche'])) {
-    $recherche = $_GET['recherche'];
-    $personnes = $personneModelDb->getRecherche($_GET['recherche']);
+if (isset($_GET['param'])) {
+    $recherche = $_GET['param'];
+    $personnes = $personneModelDb->getRecherche($recherche);
 
     $users = [];
     $user_skills = [];

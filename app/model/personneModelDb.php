@@ -199,14 +199,51 @@ class personneModelDb
         return $personnes;
     }
 
-    public function changePassword($newPassword, $email){
+    public function resetPassword($email, $cle){
 
-        $request = ("UPDATE personne SET password = :password WHERE email = :email ");
+        $request = ("INSERT INTO reset_password(personne_email, cle) VALUES(:email, :cle)");
         $stmt = $this->db->prepare($request);
         $stmt->execute([
-            'password' => $newPassword,
+            'email' => $email,
+            'cle' => $cle,
+        ]);
+    }
+
+    public function getResetPassword($cle){
+        $personne = [];
+
+        $stmt = $this->db->prepare("SELECT personne_email,cle FROM reset_password WHERE cle = :cle");
+        $stmt->execute([
+            'cle' => $cle,
+        ]);
+        $c = $stmt->fetch();
+
+        return $c;
+    }
+
+    public function changePassword($email, $newpassword){
+
+        $request = ("UPDATE personne SET password = :password WHERE email = :email");
+        $stmt = $this->db->prepare($request);
+        $stmt->execute([
+            'password' => $newpassword,
             'email' => $email,
         ]);
 
+        $request = ("DELETE FROM reset_password WHERE personne_email = :email");
+        $stmt = $this->db->prepare($request);
+        $stmt->execute([
+            'email' => $email,
+        ]);
+    }
+
+    public function getLastPassword($email)
+    {
+
+        $stmt = $this->db->prepare("SELECT password FROM personne WHERE email = :email");
+        $stmt->execute([
+            'email' => $email,
+        ]);
+        return $stmt->fetch();
     }
 }

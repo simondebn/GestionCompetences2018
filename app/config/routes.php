@@ -11,4 +11,5 @@ $site_pages = [
     'mail' => 'mail',
     'competences' => 'comp',
     'map' => 'map',
+    'reset' => 'reset',
 ];

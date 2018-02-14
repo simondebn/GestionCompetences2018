@@ -306,6 +306,16 @@ $(document).ready(function() {
 
 });
 
+function HideResetPasswordForm(){
+    $("#connexion").show();
+    $("#connexion").removeAttr("disabled");
+    $("#reinitialiser").hide();
+    $("#reinitialiser").attr("disabled", true);
+    $("#passwordForm").hide();
+    $("#email").removeAttr("disabled");
+    $("#password").removeAttr("disabled");
+}
+
 $("body").on("click", "#resetPassword", function(){
 
     if($("#connexion").is(":visible")){
@@ -315,14 +325,11 @@ $("body").on("click", "#resetPassword", function(){
         $("#reinitialiser").show();
         $("#reinitialiser").removeAttr("disabled");
         $("#passwordForm").show();
+        $("#email").attr("disabled", true);
+        $("#password").attr("disabled", true);
     }
     else{
-
-        $("#connexion").show();
-        $("#connexion").removeAttr("disabled");
-        $("#reinitialiser").hide();
-        $("#reinitialiser").attr("disabled", true);
-        $("#passwordForm").hide();
+        HideResetPasswordForm();
     }
 
 
@@ -352,6 +359,9 @@ $("body").on("click", "#reinitialiser", function(e){
             var msg = $.parseJSON(data);
             if (msg.type == 'success') {
                 bootstrapNotify(msg.msg, msg.type);
+                HideResetPasswordForm();
+                $("#password").val("");
+                $("#email").val(email);
             }
             else {
                 bootstrapNotify(msg.msg, msg.type);
@@ -359,4 +369,33 @@ $("body").on("click", "#reinitialiser", function(e){
         }
     });
 
-})
+});
+
+$('body').on("submit", "#formResetPassword", function(e){
+    e.preventDefault();
+
+    var params = {};
+
+    params["password"] = $("#password_page_reset")[0].value;
+    params["password2"] = $("#password_page_reset2")[0].value;
+    params["email"] = $("#email_page_reset")[0].value;
+
+    $.ajax({
+        url: 'reset',
+        type: 'POST',
+        data: {
+            myFunction: "resetPassword",
+            myParams: params,
+        },
+        success: function (data) {
+            var msg = $.parseJSON(data);
+            if (msg.type == 'success') {
+                bootstrapNotify(msg.msg, msg.type);
+                window.location.href = "main";
+            }
+            else {
+                bootstrapNotify(msg.msg, msg.type);
+            }
+        }
+    });
+});

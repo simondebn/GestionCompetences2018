@@ -1,5 +1,5 @@
 <?php
 
-renderConnexion('home', [
+renderSolo('home', [
     'title' => 'Connexion',
 ]) ;

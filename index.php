@@ -30,7 +30,7 @@ if(isset($_GET['page']) && isset($site_pages[$_GET['page']]))
 
 
 if(!isset($_SESSION['user_id']) || !isset($_SESSION['compte_admin']) || !isset($_SESSION['open_modal'])){
-    if($page != "connexion" && $page != "mail"){
+    if($page != "connexion" && $page != "mail" && $page != "reset"){
         $page = "accueil";
     }
 }

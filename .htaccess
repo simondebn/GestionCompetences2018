@@ -14,7 +14,7 @@ RewriteRule ^([a-z]+)$ ?page=$1 [L]
 #RewriteRule ^([a-z]+)-([a-z]+)$ ?page=$1-$2 [L]
 
 # Réécriture URL à deux paramètres pour la recherche
-RewriteRule ^([a-z]+)-([a-z]+)$ ?page=$1&recherche=$2 [L]
+RewriteRule ^([a-z]+)-([a-z0-9]+)$ ?page=$1&param=$2 [L]
 
 # Réécriture URL à deux paramètres et une pagination
 RewriteRule ^([a-z]+)-([a-z]+)-([0-9]+)$ ?page=$1-$2&pagination=$3 [L]

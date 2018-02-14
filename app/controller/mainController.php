@@ -33,7 +33,7 @@ if (isset($_SESSION['user_id']) && isset($_POST['myFunction']) && $_POST['myFunc
         'tags' => $competences
     ]);
 } else {
-    renderConnexion('home', [
+    renderSolo('home', [
         'title' => 'Connexion',
     ]) ;
 }

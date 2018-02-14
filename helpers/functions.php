@@ -20,7 +20,7 @@ function render($view, $params){
     include 'app/view/inc/footer.php';
 }
 
-function renderConnexion($view, $params){
+function renderSolo($view, $params){
     extract($params);
     include 'app/view/inc/header.php';
     include 'app/view/' . $view . '.php';
@@ -53,8 +53,8 @@ function ConnectSmtp(){
 
     // Create the Transport
     $transport = (new Swift_SmtpTransport('smtp.mailtrap.io', 25))
-        ->setUsername('3c1597c4c1e6ab')
-        ->setPassword('ba7691cb1f0e8a');
+        ->setUsername('9b63545d4f86b8')
+        ->setPassword('0a7d1e20364f24');
 
     // Create the Mailer using your created Transport
     $mailer = new Swift_Mailer($transport);
