@@ -1,8 +1,7 @@
 <?php
 
 $personnes = $personneModelDb->getAll();
-$competences = $compModelDb->getAll();
-
+$competences = $compModelDb->getMostUsed();
 $users = [];
 $table_skills = [];
 
@@ -49,7 +48,6 @@ if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'checkConnexion') {
         'title'   => 'Accueil',
         'users'   => $users,
         'tags' => $competences
-        
     ]);
 } else {
     renderConnexion('home', [

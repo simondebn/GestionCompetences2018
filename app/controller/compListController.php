@@ -1,6 +1,6 @@
 <?php
 
-$competences = $compModelDb->getAll();
+$competences = $compModelDb->getMostUsed();
 
 if (isset($_GET['recherche'])) {
     $personnes = $personneModelDb->getRecherche($_GET['recherche']);
