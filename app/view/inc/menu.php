@@ -3,7 +3,7 @@
     <?php if(isset($_SESSION['user_id'])): ?>
 
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-cefim scrolling-navbar">
-            <a class="navbar-brand" href="#"><strong>CEFIM</strong></a>
+            <a class="navbar-brand" href="main"><strong>CEFIM</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -16,7 +16,7 @@
                 </form>
                 <ul class="navbar-nav">
                     <?php if(isset($_SESSION['compte_admin']) && $_SESSION['compte_admin']): ?>
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a class="nav-link waves-effect waves-light" href="#">Liste des compétences</a>
                         </li>
                         <li class="nav-item">

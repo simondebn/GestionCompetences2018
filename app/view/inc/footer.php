@@ -29,7 +29,7 @@
 
 </body>
 <!--Footer-->
-<footer class="page-footer footer-color center-on-small-only">
+<footer class="page-footer footer-color center-on-small-only" style="padding-top: 80px;">
 
     <!--Footer Links-->
      <div class="container">

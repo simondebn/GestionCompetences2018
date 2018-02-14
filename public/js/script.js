@@ -69,22 +69,27 @@ new autoComplete({
     }
 });
 
+function Rechercher(pChaine) {
+    if(pChaine != "")
+        window.location.href = 'recherche-'+pChaine;
+}
+
 $('body').on('submit', '#form_search', function (e) {
     e.preventDefault();
     var chaine = $("#search")[0].value.toLowerCase();
-    window.location.href = 'recherche-'+chaine;
+    Rechercher(chaine);
 });
 
 $('body').on('click', '.bagde-list-cefim', function (e) {
     e.preventDefault();
     var chaine = $(this).text().toLowerCase();
-    window.location.href = 'recherche-'+chaine;
+    Rechercher(chaine);
 });
 
 $('body').on('click', '#search_button', function (e) {
     e.preventDefault();
     var chaine = $("#search")[0].value.toLowerCase();
-    window.location.href = 'recherche-'+chaine;
+    Rechercher(chaine);
 });
 
 $('body').on('click', '#deconnexion', function (e) {
@@ -204,7 +209,10 @@ $('body').on('submit', '#formModifyPersonne', function(e) {
 });
 
 $('body').on('click', 'a', function(e) {
-    e.preventDefault();
+    if($(this).attr('href') == null){
+        e.preventDefault();
+    }
+
 });
 
 $('body').on('click', '#addCompetenceForm', function(e) {
