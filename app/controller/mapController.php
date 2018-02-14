@@ -11,8 +11,10 @@ if (isset($_POST['recherche'])) {
     $user_skills = [];
 
     foreach ($personnes as $personne){
-        $user_skills = $personneModelDb->getCompetences($personne['id']);
-        $users[] = [ 'id' => $personne['id'], 'prenom' => $personne['prenom'], 'nom' => $personne['nom'], 'skills' => $user_skills];
+        if (isset($_SESSION['user_id']) && $personne['id'] != $_SESSION['user_id']) {
+            $user_skills = $personneModelDb->getCompetences($personne['id']);
+            $users[] = ['id' => $personne['id'], 'prenom' => $personne['prenom'], 'nom' => $personne['nom'], 'skills' => $user_skills];
+        }
     }
 }
 
