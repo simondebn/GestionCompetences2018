@@ -21,7 +21,7 @@
                         }
                     }
                     echo '</td><td class="actions">';
-                    echo '<button id="delete-skill-'.$s['id'].'">Supprimer</button>';
+                    echo '<button id="deleteSkill">Supprimer</button>';
                     echo '</td></tr>';
                 }             
                 ?>

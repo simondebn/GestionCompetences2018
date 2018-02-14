@@ -17,7 +17,7 @@
                 <ul class="navbar-nav">
                     <?php if(isset($_SESSION['compte_admin']) && $_SESSION['compte_admin']): ?>
                         <li class="nav-item">
-                            <a class="nav-link waves-effect waves-light" href="#">Liste des compétences</a>
+                            <a class="nav-link waves-effect waves-light" href="competences">Liste des compétences</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link waves-effect waves-light" href="#" id="addPersonne">Ajouter un utilisateur</a>
