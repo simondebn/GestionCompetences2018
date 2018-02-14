@@ -7,7 +7,7 @@ $users = [];
 $table_skills = [];
 
 foreach ($personnes as $personne){
-    if ($personne['id'] != $_SESSION['user_id']) {
+    if (isset($_SESSION['user_id']) && $personne['id'] != $_SESSION['user_id']) {
         $table_skills = $personneModelDb->getCompetences($personne['id']);
         $users[] = [ 'prenom' => $personne['prenom'], 'nom' => $personne['nom'], 'skills' => $table_skills, 'id' => $personne['id']];
     }

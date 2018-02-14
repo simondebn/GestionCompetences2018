@@ -177,7 +177,7 @@ $('body').on('submit', '#formModifyPersonne', function(e) {
 
     var myFunction = 'modifyPersonneNewPassword';
 
-    if (params['password'] == '') {
+    if (! $('#password').length) {
         myFunction = 'modifyPersonneKeepPassword';
     }
 
@@ -195,6 +195,7 @@ $('body').on('submit', '#formModifyPersonne', function(e) {
             if (msg.type == 'success') {
                 $('.modal.form').modal('hide');
                 bootstrapNotify(msg.msg, msg.type);
+                // TODO mettre à jour la liste des personnes
             }
             else {
                 bootstrapNotify(msg.msg, msg.type);

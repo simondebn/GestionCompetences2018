@@ -4,7 +4,13 @@ $error = false;
 
 if(isset($_POST['myParams'])){
     foreach ($_POST['myParams']['params'] as $str){
-        $str = h($str);
+        if ( ! is_array($str)) {
+            $str = h($str);
+        } else {
+            foreach ($str as $item) {
+                $item = h($item);
+            }
+        }
     }
 }
 
@@ -97,8 +103,7 @@ function modifyPersonne($params, $modifyPersonne)
 if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'modifyPersonneNewPassword') {
 
     try {
-        $personneModelDb->modifyNewPassword($_POST['myParams']);
-        // TODO enregistrer les nouvelles competences (dans $_POST['myParams']['competences'])
+        $personneModelDb->modifyNewPassword($_POST['myParams']['params']);
     }catch (PDOException $e) {
         echo json_encode(array(
             'type' => 'danger',
@@ -117,7 +122,6 @@ if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'modifyPersonneKeepP
 
     try {
         $personneModelDb->modifyKeepPassword($_POST['myParams']['params']);
-        // TODO enregistrer les nouvelles competences (dans $_POST['myParams']['competences'])
     }catch (PDOException $e) {
         echo json_encode(array(
             'type' => 'danger',
