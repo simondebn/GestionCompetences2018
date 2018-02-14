@@ -21,7 +21,7 @@
                         }
                     }
                     echo '</td><td class="actions">';
-                    echo '<button id="deleteSkill">Supprimer</button>';
+                    echo '<button type="button" class="btn btn-sm btn-amber" id="deleteSkill"><i class="fa fa-trash" style="font-size:24px;"></i></button>';
                     echo '</td></tr>';
                 }             
                 ?>
