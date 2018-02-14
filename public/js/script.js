@@ -74,7 +74,7 @@ new autoComplete({
 
 function Rechercher(pChaine) {
     if(pChaine != "")
-        window.location.href = 'recherche-'+pChaine;
+        window.location.href = 'recherche-'+pChaine; // TODO gestion des espaces
 }
 
 $('body').on('submit', '#form_search', function (e) {
