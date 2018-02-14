@@ -88,7 +88,7 @@ $('body').on('click', '#modifyPersonne', function () {
 });
 
 $('body').on('click', 'tr', function (e) {
-    if (e.target.className != 'badge badge-cefim') {
+    if (e.target.className != 'badge badge-cefim bagde-list-cefim') {
         $.ajax({
             url: 'main',
             type: 'POST',

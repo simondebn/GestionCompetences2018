@@ -19,9 +19,17 @@ $compModelDb = new compModelDb($db);
 
 $page = DEFAULT_PAGE;
 
+
 if(isset($_GET['page']) && isset($site_pages[$_GET['page']]))
 {
     $page = $_GET['page'];
+}
+
+if((!isset($_SESSION['user_id']) || !isset($_SESSION['compte_admin']) || !isset($_SESSION['open_modal'])) && $page != "connexion"){
+    $page = "accueil";
+}
+elseif($page == "accueil"){
+    $page = "main";
 }
 
 include 'app/controller/' . $site_pages[$page] . 'Controller.php';

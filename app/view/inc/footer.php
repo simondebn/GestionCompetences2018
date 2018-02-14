@@ -29,7 +29,7 @@
 
 </body>
 <!--Footer-->
-<footer class="page-footer footer-color center-on-small-only">
+<footer class="page-footer footer-color center-on-small-only" style="padding-top: 80px;">
 
     <!--Footer Links-->
      <div class="container">
@@ -38,7 +38,7 @@
                 <h5 class="title">Tags</h5>
                 <?php
                     foreach($tags as $tag){
-                       echo '<a href="" class="badge badge-cefim">'.$tag['nom'].'</a>'; 
+                       echo '<a href="" class="badge badge-cefim bagde-list-cefim">'.$tag['nom'].'</a>';
                     }      
                 ?>
             </div>

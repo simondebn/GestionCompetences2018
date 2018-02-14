@@ -24,3 +24,6 @@ RewriteRule ^([a-z]+)-([a-z]+)-id-([0-9]+)$ ?page=$1-$2&id=$3 [L]
 
 # Réécriture URL à trois paramètres
 RewriteRule ^([a-z]+)-([a-z]+)-([a-z]+)$ ?page=$1-$2-$3 [L]
+
+# Envoi vers la page si la page n'existe pas
+ErrorDocument 404 /main

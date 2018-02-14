@@ -25,8 +25,10 @@ $('body').on('click', '#connexion', function (e) {
         params[value.name] = value.value;
     });
 
+    console.log(params);
+
     $.ajax({
-        url: "main",
+        url: "connexion",
         type: 'POST',
         data:
             {
@@ -36,6 +38,7 @@ $('body').on('click', '#connexion', function (e) {
                 }
             },
         success: function (data) {
+            console.log(data);
             var msg = JSON.parse(data);
             if (msg.type == 'success') {
                 window.location.href = "main";
@@ -69,34 +72,39 @@ new autoComplete({
     }
 });
 
+function Rechercher(pChaine) {
+    if(pChaine != "")
+        window.location.href = 'recherche-'+pChaine;
+}
+
 $('body').on('submit', '#form_search', function (e) {
     e.preventDefault();
     var chaine = $("#search")[0].value.toLowerCase();
-    window.location.href = 'recherche-'+chaine;
+    Rechercher(chaine);
 });
 
-$('body').on('click', '.badge', function (e) {
+$('body').on('click', '.bagde-list-cefim', function (e) {
     e.preventDefault();
     var chaine = $(this).text().toLowerCase();
-    window.location.href = 'recherche-'+chaine;
+    Rechercher(chaine);
 });
 
 $('body').on('click', '#search_button', function (e) {
     e.preventDefault();
     var chaine = $("#search")[0].value.toLowerCase();
-    window.location.href = 'recherche-'+chaine;
+    Rechercher(chaine);
 });
 
 $('body').on('click', '#deconnexion', function (e) {
     $.ajax({
-        url: "home",
+        url: "connexion",
         type: 'POST',
         data:
             {
                 myFunction: 'deconnexion'
             },
         success: function (data) {
-            window.location.href = 'home';
+            window.location.href = 'accueil';
         }
     });
 
@@ -205,7 +213,10 @@ $('body').on('submit', '#formModifyPersonne', function(e) {
 });
 
 $('body').on('click', 'a', function(e) {
-    e.preventDefault();
+    if($(this).attr('href') == null){
+        e.preventDefault();
+    }
+
 });
 
 $('body').on('click', '#addCompetenceForm', function(e) {

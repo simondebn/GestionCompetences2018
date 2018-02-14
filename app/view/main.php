@@ -9,6 +9,7 @@
 
     <div class="row mt-3 pt-3">
     <div class="col-md-8">
+        <?php if(isset($recherche) && $recherche != null){ echo "<p align='center' style='padding-top:5px'>Résultat de la recherche pour <b>'$recherche'.</b></p>"; } ?>
         <table class="table"id="users">
             <thead>
             <tr>
@@ -25,7 +26,7 @@
                     echo '<td class="prenom">'.$user['prenom'].'</td>';
                     echo '<td class="competences">';
                     foreach($user_skills as $user_skill){
-                        echo '<a href="" class="badge badge-cefim">'.$user_skill.'</a>';
+                        echo '<a href="" class="badge badge-cefim bagde-list-cefim">'.$user_skill.'</a>';
                     }
                     echo '</td></tr>';
                 }             
