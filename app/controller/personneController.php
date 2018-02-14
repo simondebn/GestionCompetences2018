@@ -40,11 +40,10 @@ function addPersonne($params, $personneModelDb)
 }
 
 if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'addPersonne') {
-
-    $_POST['myParams']['params']['password'] = sha1($_POST['myParams']['params']['password']);
+    // TODO généger un mot de passe aléatoire
+    $_POST['myParams']['params']['password'] = sha1('dadfba16');
     try {
-        addPersonne($_POST['myParams'], $personneModelDb);
-
+        $personneModelDb->add($_POST['myParams']['params']);
     } catch (PDOException $e) {
         echo json_encode(array(
             'type' => 'danger',
@@ -54,9 +53,10 @@ if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'addPersonne') {
     }
 
     if ($error === false) {
+        // TODO envoyer mail au nouvel utilisateur
         echo json_encode(array(
             'type' => 'success',
-            'msg' => 'Votre ajout a été enregistré !',
+            'msg' => 'Le nouvel utilicateur a été créé !',
         ));
     }
 }
@@ -71,8 +71,7 @@ function deletePersonne($id, $personneModelDb)
 if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'deletePersonne') {
 
     try {
-        deletePersonne($_POST['id'], $personneModelDb);
-
+        $personneModelDb->delete($_POST['id']);
     } catch (PDOException $e) {
         echo json_encode(array(
             'type' => 'danger',
@@ -84,7 +83,7 @@ if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'deletePersonne') {
     if ($error === false) {
         echo json_encode(array(
             'type' => 'success',
-            'msg' => 'Votre suppression a été enregistré !',
+            'msg' => 'Le profil a bien été supprimé !',
         ));
     }
 }
@@ -95,11 +94,12 @@ function modifyPersonne($params, $modifyPersonne)
     return $modifyPersonne->modify($params['params']);
 }
 
-if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'modifyPersonne') {
+if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'modifyPersonneNewPassword') {
 
     try {
-        modifyPersonne($_POST['myParams'], $PersonneModelDb);
-        }catch (PDOException $e) {
+        $personneModelDb->modifyNewPassword($_POST['myParams']);
+        // TODO enregistrer les nouvelles competences (dans $_POST['myParams']['competences'])
+    }catch (PDOException $e) {
         echo json_encode(array(
             'type' => 'danger',
             'msg' => 'Une erreur est survenue !'
@@ -109,7 +109,26 @@ if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'modifyPersonne') {
     if ($error === false) {
         echo json_encode(array(
             'type' => 'success',
-            'msg' => 'Votre modification a été enregistré !',
+            'msg' => 'Votre modification a été enregistrée !',
+        ));
+    }
+}
+if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'modifyPersonneKeepPassword') {
+
+    try {
+        $personneModelDb->modifyKeepPassword($_POST['myParams']['params']);
+        // TODO enregistrer les nouvelles competences (dans $_POST['myParams']['competences'])
+    }catch (PDOException $e) {
+        echo json_encode(array(
+            'type' => 'danger',
+            'msg' => 'Une erreur est survenue !'
+        ));
+        $error = true;
+    }
+    if ($error === false) {
+        echo json_encode(array(
+            'type' => 'success',
+            'msg' => 'Votre modification a été enregistrée !',
         ));
     }
 }

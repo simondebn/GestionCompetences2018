@@ -37,9 +37,7 @@ class compModelDb
     }
 
     public function getRecherche($string){
-        // quand le champ actif sera sur la table competence :
-        //$stmt = $this->db->prepare("SELECT * FROM competence WHERE nom LIKE :string AND actif = 1");
-        $stmt = $this->db->prepare("SELECT * FROM competence WHERE nom LIKE :string");
+        $stmt = $this->db->prepare("SELECT * FROM competence WHERE nom LIKE :string AND actif = 1");
         $stmt->execute([
             'string' => '%'.$string.'%'
         ]);

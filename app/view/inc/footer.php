@@ -6,6 +6,8 @@
 <script type="text/javascript" src="public/js/popper.min.js"></script>
 <!-- Bootstrap core JavaScript -->
 <script type="text/javascript" src="public/js/bootstrap.min.js"></script>
+<!-- Bootstrap notify -->
+<script type="text/javascript" src="public/js/bootstrap-notify.min.js"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="public/js/mdb.min.js"></script>
 <!-- List.js -->

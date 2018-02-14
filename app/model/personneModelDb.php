@@ -16,11 +16,25 @@ class personneModelDb
     }
 
     public function getOne($id){
-        $stmt = $this->db->prepare("SELECT * FROM personne WHERE id = :id");
-        $stmt->execute([
+        $stmt_personne = $this->db->prepare("SELECT * FROM personne WHERE id = :id");
+        $stmt_personne->execute([
             'id' => $id
         ]);
-        return $stmt->fetch();
+        $personne = $stmt_personne->fetch();
+
+        // TODO
+        $stmt_competence = $this->db->prepare("SELECT competence.nom from competence JOIN lien_personne_comptence ON lien_personne_comptence.id_competence=competence.id WHERE lien_personne_comptence.id_personne = :id");
+        $stmt_competence->execute([
+            'id' => $id
+        ]);
+        $competences = [];
+        foreach($stmt_competence as $c) {
+            $competences[] = $c['nom'];
+        }
+
+        $personne['competences'] = $competences;
+
+        return $personne;
     }
 
     public function getFromEmail($email){
@@ -56,9 +70,14 @@ class personneModelDb
     }
     
     public function add($newPersonne) {
-        $request = ("INSERT INTO personne (nom, prenom, email, telephone, description_competences, nom_entreprise, ville_entreprise, description_projets, password, active, compte_admin)  VALUES (:nom, :prenom, :email, :telephone, :description_competences, :nom_entreprise, :ville_entreprise, :description_projets, :password, 1, 0)");
+        $request = ("INSERT INTO personne (nom, prenom, email, password, active, compte_admin, never_cennected)  VALUES (:nom, :prenom, :email, :password, 1, 0, 1)");
         $stmt = $this->db->prepare($request);
-        return $stmt->execute($newPersonne);
+        return $stmt->execute([
+            'nom' => $newPersonne['nom'],
+            'prenom' => $newPersonne['prenom'],
+            'email' => $newPersonne['email'],
+            'password' => $newPersonne['password']
+        ]);
     }
 
     public function delete($id) {
@@ -68,10 +87,35 @@ class personneModelDb
         ]);
     }
 
-    public function modify($modif) {
-        $request = ("UPDATE personne SET nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, description_competences = :description_competences, nom_entreprise = :nom_entreprise, ville_entreprise = :ville_entreprise, description_projets = :description_projets, password = :password WHERE id = :id ");
+    public function modifyNewPassword($modif) {
+        $request = ("UPDATE personne SET nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, nom_entreprise = :nom_entreprise, ville_entreprise = :ville_entreprise, description_projets = :description_projets, password = :password, never_connected = 0 WHERE id = :id ");
         $stmt = $this->db->prepare($request);
-        $stmt->execute($modif);
+        $stmt->execute([
+            'id' => $modif['id'],
+            'nom' => $modif['nom'],
+            'prenom' => $modif['prenom'],
+            'email' => $modif['email'],
+            'telephone' => $modif['telephone'],
+            'description_projets' => $modif['description_projets'],
+            'nom_entreprise' => $modif['nom_entreprise'],
+            'ville_entreprise' => $modif['ville_entreprise'],
+            'password' => $modif['password']
+        ]);
+    }
+
+    public function modifyKeepPassword($modif) {
+        $request = ("UPDATE personne SET nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, nom_entreprise = :nom_entreprise, ville_entreprise = :ville_entreprise, description_projets = :description_projets WHERE id = :id ");
+        $stmt = $this->db->prepare($request);
+        $stmt->execute([
+            'id' => $modif['id'],
+            'nom' => $modif['nom'],
+            'prenom' => $modif['prenom'],
+            'email' => $modif['email'],
+            'telephone' => $modif['telephone'],
+            'description_projets' => $modif['description_projets'],
+            'nom_entreprise' => $modif['nom_entreprise'],
+            'ville_entreprise' => $modif['ville_entreprise'],
+        ]);
     }
 
     public function checkPassword($email, $password) {
