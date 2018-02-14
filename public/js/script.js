@@ -25,8 +25,10 @@ $('body').on('click', '#connexion', function (e) {
         params[value.name] = value.value;
     });
 
+    console.log(params);
+
     $.ajax({
-        url: "main",
+        url: "connexion",
         type: 'POST',
         data:
             {
@@ -36,6 +38,7 @@ $('body').on('click', '#connexion', function (e) {
                 }
             },
         success: function (data) {
+            console.log(data);
             var msg = JSON.parse(data);
             if (msg.type == 'success') {
                 window.location.href = "main";
@@ -94,14 +97,14 @@ $('body').on('click', '#search_button', function (e) {
 
 $('body').on('click', '#deconnexion', function (e) {
     $.ajax({
-        url: "home",
+        url: "connexion",
         type: 'POST',
         data:
             {
                 myFunction: 'deconnexion'
             },
         success: function (data) {
-            window.location.href = 'home';
+            window.location.href = 'accueil';
         }
     });
 
@@ -182,30 +185,51 @@ $('body').on('submit', '#formModifyPersonne', function(e) {
 
     var myFunction = 'modifyPersonneNewPassword';
 
-    if (params['password'] == '') {
+    if (! $('#password').length) {
         myFunction = 'modifyPersonneKeepPassword';
     }
 
-    $.ajax({
-        url: 'personne',
-        type: 'POST',
-        data: {
-            myFunction: myFunction,
-            myParams: {
-                params: params
-            }
-        },
-        success: function (data) {
-            var msg = $.parseJSON(data);
-            if (msg.type == 'success') {
-                $('.modal.form').modal('hide');
-                bootstrapNotify(msg.msg, msg.type);
-            }
-            else {
-                bootstrapNotify(msg.msg, msg.type);
+    var ville_is_valide = false;
+    $.each(data_google_matches_current_ville['results'], function(index, values) {
+        if (values['formatted_address'] == params['ville_entreprise']) {
+            var is_city_or_less = false;
+            $.each(values['address_components'], function(indice, item) {
+                if (item['types'].indexOf('locality')) {
+                    is_city_or_less = true;
+                    params['lat_entreprise'] = values['geometry']['location']['lat'];
+                    params['lon_entreprise'] = values['geometry']['location']['lng'];
+                }
+            });
+            if (is_city_or_less) {
+                ville_is_valide = true;
             }
         }
     });
+    if (ville_is_valide && params['ville_entreprise'].trim() != '') {
+        $.ajax({
+            url: 'personne',
+            type: 'POST',
+            data: {
+                myFunction: myFunction,
+                myParams: {
+                    params: params
+                }
+            },
+            success: function (data) {
+                var msg = $.parseJSON(data);
+                if (msg.type == 'success') {
+                    $('.modal.form').modal('hide');
+                    bootstrapNotify(msg.msg, msg.type);
+                    // TODO mettre à jour la liste des personnes
+                }
+                else {
+                    bootstrapNotify(msg.msg, msg.type);
+                }
+            }
+        });
+    } else {
+        //TODO : indiquer sur le formulaire qu'il faut moins une ville de renseignée
+    }
 });
 
 $('body').on('click', 'a', function(e) {

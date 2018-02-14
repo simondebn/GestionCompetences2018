@@ -79,7 +79,9 @@ class compModelDb
         
         $request = ("UPDATE competence SET actif = 0 WHERE id = :id");
         $stmt = $this->db->prepare($request);
-        $stmt->execute($modif);
+        $stmt->execute([
+            'id' => $id
+        ]);
         $request = ("UPDATE competence SET id_parent = 0 WHERE id_parent = :id");
         $stmt = $this->db->prepare($request);
         $stmt->execute([

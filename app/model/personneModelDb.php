@@ -70,7 +70,7 @@ class personneModelDb
     }
     
     public function add($newPersonne) {
-        $request = ("INSERT INTO personne (nom, prenom, email, password, active, compte_admin, never_cennected)  VALUES (:nom, :prenom, :email, :password, 1, 0, 1)");
+        $request = ("INSERT INTO personne (nom, prenom, email, password, active, compte_admin, never_connected)  VALUES (:nom, :prenom, :email, :password, 1, 0, 1)");
         $stmt = $this->db->prepare($request);
         return $stmt->execute([
             'nom' => $newPersonne['nom'],
@@ -88,7 +88,7 @@ class personneModelDb
     }
 
     public function modifyNewPassword($modif) {
-        $request = ("UPDATE personne SET nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, nom_entreprise = :nom_entreprise, ville_entreprise = :ville_entreprise, description_projets = :description_projets, password = :password, never_connected = 0 WHERE id = :id ");
+        $request = ("UPDATE personne SET nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, nom_entreprise = :nom_entreprise, ville_entreprise = :ville_entreprise, lat_entreprise = :lat_entreprise, lon_entreprise = :lon_entreprise, description_projets = :description_projets, password = :password, never_connected = 0 WHERE id = :id ");
         $stmt = $this->db->prepare($request);
         $stmt->execute([
             'id' => $modif['id'],
@@ -99,12 +99,18 @@ class personneModelDb
             'description_projets' => $modif['description_projets'],
             'nom_entreprise' => $modif['nom_entreprise'],
             'ville_entreprise' => $modif['ville_entreprise'],
+            'lat_entreprise' => isset($modif['lat_entreprise']) ? $modif['lat_entreprise'] : NULL,
+            'lon_entreprise' => isset($modif['lon_entreprise']) ? $modif['lon_entreprise'] : NULL,
             'password' => $modif['password']
         ]);
+
+        if (isset($modif['competences'])) {
+            $this->saveCompetences($modif['id'], $modif['competences']);
+        }
     }
 
     public function modifyKeepPassword($modif) {
-        $request = ("UPDATE personne SET nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, nom_entreprise = :nom_entreprise, ville_entreprise = :ville_entreprise, description_projets = :description_projets WHERE id = :id ");
+        $request = ("UPDATE personne SET nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, nom_entreprise = :nom_entreprise, ville_entreprise = :ville_entreprise, lat_entreprise = :lat_entreprise, lon_entreprise = :lon_entreprise, description_projets = :description_projets WHERE id = :id ");
         $stmt = $this->db->prepare($request);
         $stmt->execute([
             'id' => $modif['id'],
@@ -115,7 +121,54 @@ class personneModelDb
             'description_projets' => $modif['description_projets'],
             'nom_entreprise' => $modif['nom_entreprise'],
             'ville_entreprise' => $modif['ville_entreprise'],
+            'lat_entreprise' => isset($modif['lat_entreprise']) ? $modif['lat_entreprise'] : NULL,
+            'lon_entreprise' => isset($modif['lon_entreprise']) ? $modif['lon_entreprise'] : NULL,
         ]);
+
+        if (isset($modif['competences'])) {
+            $this->saveCompetences($modif['id'], $modif['competences']);
+        }
+
+    }
+
+    private function saveCompetences($id, $arrayCompetences) {
+        $competencesAvant = $this->getCompetences($id);
+        $competencesMaintenues = array();
+        foreach ($competencesAvant as $compAvant) {
+            if ( ! in_array($compAvant, $arrayCompetences)) {
+                $stmt = $this->db->prepare("DELETE FROM lien_personne_comptence where id_personne = :id_personne AND id_competence = (SELECT id FROM competence WHERE nom = :nom_competence)");
+                $stmt->execute([
+                    'id_personne' => $id,
+                    'nom_competence' => $compAvant
+                ]);
+            } else {
+                $competencesMaintenues[] = $compAvant;
+            }
+        }
+        foreach ($arrayCompetences as $compApres) {
+            if ( ! in_array($compApres, $competencesMaintenues)) {
+                $stmt = $this->db->prepare("SELECT id FROM competence WHERE nom = :nom AND actif = 1");
+                $stmt->execute([
+                    'nom' => $compApres
+                ]);
+                $result = $stmt->fetch();
+                $compId = 0;
+                if ($stmt->rowCount()) {
+                    $compId = $result['id'];
+                } else {
+                    $stmtCreateComp = $this->db->prepare("INSERT INTO competence (nom, id_parent, actif) VALUES (:nom, NULL, 1)");
+                    $stmtCreateComp->execute([
+                        'nom' => $compApres
+                    ]);
+                    $compId = $this->db->lastInsertId();
+                }
+                $stmtAddComp = $this->db->prepare("INSERT INTO lien_personne_comptence (id_personne, id_competence) VALUES (:id_personne, :id_competence)");
+                $stmtAddComp->execute([
+                    'id_personne' => $id,
+                    'id_competence' => $compId
+                ]);
+            }
+        }
     }
 
     public function checkPassword($email, $password) {

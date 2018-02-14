@@ -2,6 +2,8 @@
 
 $competences = $compModelDb->getMostUsed();
 
+$recherche = $_GET['recherche'];
+
 if (isset($_GET['recherche'])) {
     $personnes = $personneModelDb->getRecherche($_GET['recherche']);
 
@@ -17,5 +19,6 @@ if (isset($_GET['recherche'])) {
 render('main', [
     'title'   => 'Liste des compétences',
     'users'   => $users,
-    'tags' => $competences
+    'tags' => $competences,
+    'recherche' => $recherche
 ]);
