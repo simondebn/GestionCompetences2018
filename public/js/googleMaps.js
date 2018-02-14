@@ -38,10 +38,11 @@ function initMap() {
             data:
                 {
                     myFunction: 'getAllLocations',
-                    recherche : $("#search")[0].value.toLowerCase(),
+                    recherche : $("#search_test").text(),
                 },
             success: function (data) {
                 console.log(data);
+                console.log($("#search_test").text());
                 var json = JSON.parse(data);
                 var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
                 var markers = [];
