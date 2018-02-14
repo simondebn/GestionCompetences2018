@@ -9,7 +9,7 @@
 
     <div class="row mt-3 pt-3">
     <div class="col-md-8">
-        <?php if(isset($recherche) && $recherche != null){ echo "<p align='center' style='padding-top:5px'>Résultat de la recherche pour <b>'$recherche'.</b></p>"; } ?>
+        <?php if(isset($recherche) && $recherche != null){ echo "<p align='center' style='padding-top:5px'>Résultat de la recherche pour '$recherche'.</b></p>"; } ?>
         <table class="table"id="users">
             <thead>
             <tr>
@@ -34,7 +34,7 @@
             </tbody>
         </table>
     </div>
-    <div class="col-md-4" data-spy="affix" data-offset-top="100" data-offset-bottom="150">
+    <div class="col-md-4" data-spy="affix" data-offset-top="100">
         <div id="map"></div>
     </div>
 </div>
