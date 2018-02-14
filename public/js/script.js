@@ -19,11 +19,11 @@ function bootstrapNotify(msg, type) {
 }
 
 $('body').on('click', '#connexion', function (e) {
-    e.preventDefault();
+    //e.preventDefault();
     var params = {};
-    $.each($('#formConnexion').serializeArray(), function (index, value) {
-        params[value.name] = value.value;
-    });
+
+    params['email'] = $("#email")[0].value;
+    params['password'] = $("#password")[0].value;
 
     console.log(params);
 
@@ -74,7 +74,7 @@ new autoComplete({
 
 function Rechercher(pChaine) {
     if(pChaine != "")
-        window.location.href = 'recherche-'+pChaine;
+        window.location.href = 'recherche-'+pChaine; // TODO gestion des espaces
 }
 
 $('body').on('submit', '#form_search', function (e) {
@@ -264,22 +264,94 @@ $('nav').on('click', function () {
 $('input').on('change paste keyup', function () {
    modifyPaginationClasses();
 });
-$('th').on('click', function () {
+$('body').on('click', 'th', function () {
    modifyPaginationClasses();
 });
+
+/** Liste Users **/
 
 var user_options = {
   valueNames: [ 'nom', 'prenom' ]
 },
-  userList = new List('users', user_options),
 
-    comp_options = {
-        valueNames: ['competence', 'children'],
-        page: 5,
-        pagination: [{
-                innerWindow: 1,
-                outerWindow: 1,
-            }],
-    },
-  compList = new List('comp', comp_options);
+userList = new List('users', user_options);
+
+/** Liste Users **/
+
+var comp_options = {
+    valueNames: ['competence', 'children'],
+    page: 5,
+    pagination: [{
+            innerWindow: 1,
+            outerWindow: 1
+        }]
+};
+
+var compList = new List('comp', comp_options);
+
+
 /*********************************/
+// GESTION RESET PASSWORD
+/*********************************/
+
+$(document).ready(function() {
+
+    $("#reinitialiser").hide();
+    $("#passwordForm").hide();
+
+});
+
+$("body").on("click", "#resetPassword", function(){
+
+    if($("#connexion").is(":visible")){
+
+        $("#connexion").hide();
+        $("#connexion").attr("disabled", true);
+        $("#reinitialiser").show();
+        $("#reinitialiser").removeAttr("disabled");
+        $("#passwordForm").show();
+    }
+    else{
+
+        $("#connexion").show();
+        $("#connexion").removeAttr("disabled");
+        $("#reinitialiser").hide();
+        $("#reinitialiser").attr("disabled", true);
+        $("#passwordForm").hide();
+    }
+
+
+});
+
+$("body").on("submit", "#formConnexion", function(e){
+
+    if($("#connexion").is(":visible")){
+        e.preventDefault();
+    }
+});
+
+$("body").on("click", "#reinitialiser", function(e){
+
+    e.preventDefault();
+
+    var email = $("#email_reset_password")[0].value;
+
+    $.ajax({
+        url: 'mail',
+        type: 'POST',
+        data: {
+            myFunction: "resetPassword",
+            myParams: email,
+        },
+        success: function (data) {
+            var msg = $.parseJSON(data);
+            if (msg.type == 'success') {
+                bootstrapNotify(msg.msg, msg.type);
+            }
+            else {
+                bootstrapNotify(msg.msg, msg.type);
+            }
+        }
+    });
+
+})

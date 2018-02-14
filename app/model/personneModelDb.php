@@ -198,4 +198,15 @@ class personneModelDb
 
         return $personnes;
     }
+
+    public function changePassword($newPassword, $email){
+
+        $request = ("UPDATE personne SET password = :password WHERE email = :email ");
+        $stmt = $this->db->prepare($request);
+        $stmt->execute([
+            'password' => $newPassword,
+            'email' => $email,
+        ]);
+
+    }
 }

@@ -34,7 +34,7 @@
             </tbody>
         </table>
     </div>
-    <div class="col-md-4" data-spy="affix" data-offset-top="100" data-offset-bottom="150">
+    <div class="col-md-4" data-spy="affix" data-offset-top="100">
         <div id="map"></div>
     </div>
 </div>

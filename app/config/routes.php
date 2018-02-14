@@ -8,6 +8,7 @@ $site_pages = [
     'main' => 'main',
     'recherche' => 'compList',
     'personne' => 'personne',
+    'mail' => 'mail',
     'competences' => 'comp',
-    'map' => 'map'
+    'map' => 'map',
 ];

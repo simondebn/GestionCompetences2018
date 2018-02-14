@@ -18,9 +18,8 @@ function initMap() {
                         recherche : $("#search_test").text(),
                     },
                 success: function (data) {
-                    console.log(data);
-                    console.log($("#search_test").text());
                     var json = JSON.parse(data);
+                    console.log(json);
                     var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
                     var markers = [];
                     var index = 0;

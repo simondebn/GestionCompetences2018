@@ -14,6 +14,9 @@ include 'app/config/db.php';
 include 'app/model/personneModelDb.php';
 include 'app/model/compModelDb.php';
 
+//COMPOSER LOAD
+require_once 'composer/vendor/autoload.php';
+
 $personneModelDb = new personneModelDb($db);
 $compModelDb = new compModelDb($db);
 
@@ -25,8 +28,11 @@ if(isset($_GET['page']) && isset($site_pages[$_GET['page']]))
     $page = $_GET['page'];
 }
 
-if((!isset($_SESSION['user_id']) || !isset($_SESSION['compte_admin']) || !isset($_SESSION['open_modal'])) && $page != "connexion"){
-    $page = "accueil";
+
+if(!isset($_SESSION['user_id']) || !isset($_SESSION['compte_admin']) || !isset($_SESSION['open_modal'])){
+    if($page != "connexion" && $page != "mail"){
+        $page = "accueil";
+    }
 }
 elseif($page == "accueil"){
     $page = "main";

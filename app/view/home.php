@@ -25,11 +25,17 @@
                 <i class="fa fa-lock prefix grey-text"></i>
                 <input type="password" id="password" name="password" class="form-control" value="dadfba16">
                 <label for="password">mot de passe</label>
-                <p class="font-small blue-text d-flex justify-content-end"><a href="#" class="blue-text ml-1"> Un trou de mémoire?</a></p>
+                <p class="font-small blue-text d-flex justify-content-end"><a id="resetPassword" class="blue-text ml-1"> Un trou de mémoire?</a></p>
+            </div>
+            <div class="md-form" id="passwordForm">
+                <i class="fa fa-envelope prefix grey-text"></i>
+                <input type="email" id="email_reset_password" name="email_reset_password" class="form-control" value="">
+                <label for="email_reset_password">e-mail</label>
             </div>
 
             <div class="text-center">
                 <button class="btn btn-elegant" id="connexion">Se connecter</button>
+                <button class="btn btn-elegant" id="reinitialiser">Réinitialiser</button>
             </div>
         </form>
         <!-- Form login -->
