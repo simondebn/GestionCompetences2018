@@ -11,7 +11,7 @@
     </div>
 </div>
 <div class="row justify-content-center" style="margin-top:50px">
-    <div class="col-md-4 ml-3 mx-3">
+    <div class="col-md-4 ml-3 mx-3 mb-perso">
         <!-- Form login -->
         <form class="animated bounceInUp" action="#" id="formConnexion">
 
