@@ -264,28 +264,31 @@ $('nav').on('click', function () {
 $('input').on('change paste keyup', function () {
    modifyPaginationClasses();
 });
-$('th').on('click', function () {
+$('body').on('click', 'th', function () {
    modifyPaginationClasses();
 });
+
+/** Liste Users **/
 
 var user_options = {
   valueNames: [ 'nom', 'prenom' ]
 },
-  userList = new List('users', user_options),
 
-var userList = new List('users', options);
+userList = new List('users', user_options);
 
+/** Liste Users **/
 
-comp_options = {
-        valueNames: ['competence', 'children'],
-        page: 5,
-        pagination: [{
-                innerWindow: 1,
-                outerWindow: 1,
-            }],
-    },
-  compList = new List('comp', comp_options);
-/*********************************/
+var comp_options = {
+    valueNames: ['competence', 'children'],
+    page: 5,
+    pagination: [{
+            innerWindow: 1,
+            outerWindow: 1
+        }]
+};
+
+var compList = new List('comp', comp_options);
+
 
 /*********************************/
 // GESTION RESET PASSWORD
