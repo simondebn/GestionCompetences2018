@@ -3,6 +3,9 @@
     <?php if(isset($_SESSION['compte_admin']) && $_SESSION['compte_admin']): ?>
         <div id="is_admin" class="hide"></div>
     <?php endif; ?>
+    <?php if(isset($_SESSION['open_modal']) && $_SESSION['open_modal']): ?>
+        <div id="open_modal" class="hide"></div>
+    <?php endif; ?>
 
     <div class="row mt-3 pt-3">
     <div class="col-md-8">
@@ -17,13 +20,12 @@
             <tbody class="list">
             <?php 
                 foreach($users as $user){
-                    
-                    $skills = $user['skills'];
-                    echo '<tr><td class="nom">'.$user['nom'].'</td>';
+                    $user_skills = $user['skills'];
+                    echo '<tr data-id="'. $user['id'] .'"><td class="nom">'.$user['nom'].'</td>';
                     echo '<td class="prenom">'.$user['prenom'].'</td>';
                     echo '<td class="competences">';
-                    foreach($skills as $skill){
-                        echo '<a class="badge badge-cefim">'.$skill.'</a>';
+                    foreach($user_skills as $user_skill){
+                        echo '<a href="" class="badge badge-cefim">'.$user_skill.'</a>';
                     }
                     echo '</td></tr>';
                 }             

@@ -75,3 +75,7 @@ label {
 table.table tr{
     cursor:pointer; !important;
 }
+
+.remove_badge {
+    padding-left: 5px;
+}

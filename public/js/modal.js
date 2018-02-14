@@ -17,16 +17,33 @@ function addAutoComplete() {
             });
         }
     });
+    var competence_autocomplete_form;
+    new autoComplete({
+        selector: 'input#competences',
+        source: function(term, response){
+            try { competence_autocomplete_form.abort(); } catch(e){}
+            competence_autocomplete_form = $.ajax({
+                url: 'main',
+                type: 'POST',
+                data:
+                    {
+                        myFunction: 'autoCompleteCompetence',
+                        search: term
+                    },
+                success: function (data) {
+                    var json = $.parseJSON(data);
+                    response(json);
+                }
+            });
+        }
+    });
 }
 
-$('body').on('click', '#addPersonne', function () {
+function displayModalPersonne(json) {
     $.ajax({
         url: 'app/view/modalFormPersonne.php',
         type: 'POST',
-        data: {
-            contexte: 'creation',
-            modal_title: 'Création d\'un nouvel utilisateur'
-        }
+        data: json
     })
         .done(function (html) {
             $('.modal.form .modal-dialog').html(html);
@@ -37,50 +54,95 @@ $('body').on('click', '#addPersonne', function () {
         });
 
     $('.modal.form').modal('show');
+}
+
+$('body').on('click', '#addPersonne', function () {
+    var json = {
+        contexte: 'creation',
+        modal_title: 'Création d\'un nouvel utilisateur'
+    };
+    displayModalPersonne(json);
 });
 
 $('body').on('click', '#modifyPersonne', function () {
     $.ajax({
-        url: 'app/view/modalFormPersonne.php',
+        url: 'main',
         type: 'POST',
         data: {
-            contexte: 'modification',
-            modal_title: 'Modification du profil'
+            myFunction: 'modalModifyPersonne',
+            user_id: ''
+        },
+        success: function(data) {
+            var json = {
+                contexte: 'modification',
+                modal_title: 'Modification du profil',
+                user_values: $.parseJSON(data),
+                prevent_delete: 0
+            };
+            if ($('#is_admin').length) {
+                json['prevent_delete'] = 1;
+            }
+            displayModalPersonne(json);
         }
-    })
-        .done(function (html) {
-            $('.modal.form .modal-dialog').html(html);
-            addAutoComplete();
-        })
-        .fail(function () {
-            bootstrapNotify("Une erreur s'est produite", 'danger')
-        });
-
-    $('.modal.form').modal('show');
+    });
 });
 
-$('body').on('click', 'tr td:not(:last-child)', function () {
-    var data = {
-        contexte: 'consultation',
-        modal_title: 'Consultation'
-    };
-    if ($('#is_admin').length) {
-        data = {
-            contexte: 'modification',
-            modal_title: 'Consultation / Modification'
-        };
+$('body').on('click', 'tr', function (e) {
+    if (e.target.className != 'badge badge-cefim') {
+        $.ajax({
+            url: 'main',
+            type: 'POST',
+            data: {
+                myFunction: 'modalModifyPersonne',
+                user_id: $(this).data('id')
+            },
+            success: function(data) {
+                var json = {
+                    contexte: 'consultation',
+                    modal_title: 'Consultation',
+                    prevent_delete: 0
+                };
+                if ($('#is_admin').length) {
+                    json = {
+                        contexte: 'modification',
+                        modal_title: 'Consultation / Modification',
+                        prevent_delete: 0
+                    };
+                }
+                json['user_values'] = $.parseJSON(data);
+                displayModalPersonne(json);
+            }
+        });
     }
-    $.ajax({
-        url: 'app/view/modalFormPersonne.php',
-        type: 'POST',
-        data: data
-    })
-        .done(function (html) {
-            $('.modal.form .modal-dialog').html(html);
-        })
-        .fail(function () {
-            bootstrapNotify("Une erreur s'est produite", 'danger')
-        });
-
-    $('.modal.form').modal('show');
 });
+
+$('body').on('click', '.badge', function (e) {
+    if (e.target.className == 'remove_badge') {
+        e.preventDefault();
+        $(this).remove();
+    }
+});
+
+if ($('#open_modal').length) {
+    $(this).remove();
+    $.ajax({
+        url: 'main',
+        type: 'POST',
+        data: {
+            myFunction: 'modalModifyPersonne',
+            user_id: ''
+        },
+        success: function(data) {
+            var json = {
+                contexte: 'first_connexion',
+                modal_title: 'Première Connexion',
+                user_values: $.parseJSON(data),
+                prevent_delete: 0
+            };
+            if ($('#is_admin').length) {
+                json['prevent_delete'] = 1;
+            }
+            displayModalPersonne(json);
+        }
+    });
+}

@@ -8,7 +8,7 @@ if (isset($_GET['recherche'])) {
 
     foreach ($personnes as $personne){
         $skills = $personneModelDb->getCompetences($personne['id']);
-        $users[] = [ 'prenom' => $personne['prenom'], 'nom' => $personne['nom'], 'skills' => $skills];
+        $users[] = [ 'id' => $personne['id'], 'prenom' => $personne['prenom'], 'nom' => $personne['nom'], 'skills' => $user_skills];
     }
 }
 
