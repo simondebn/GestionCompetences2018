@@ -28,12 +28,29 @@ class compModelDb
         return $competences;
     }
     
+    /* retourne les dix compétences les plus recensées en base */
+    public function getMostUsed(){
+        $stmt = $this->db->prepare("SELECT id_competence, competence.nom, count(*) AS nb  FROM groupe_wittgenstein.lien_personne_comptence, competence  WHERE competence.id = id_competence GROUP BY id_competence
+             ORDER BY nb LIMIT 10"); 
+             $stmt->execute();
+        $competences = [];
+        foreach ($stmt as $p) {
+            $competences[$p['id_competence']] = $p;
+        }
+        return $competences;
+    }
+    
+    /* renvoie les noms et les id des compétences enfants d'une compétence parent*/
     public function getChildren($id){
-        $stmt = $this->db->prepare("SELECT * FROM competence WHERE id_parent = :id"); 
+        $stmt = $this->db->prepare("SELECT id, nom FROM competence WHERE id_parent = :id"); 
              $stmt->execute([
             'id' => $id
         ]);
-        return $stmt->fetch();
+        $children = [];
+        foreach ($stmt as $p) {
+            $children[$p['id']] = $p;
+        }
+        return $children;
     }
 
     public function getRecherche($string){

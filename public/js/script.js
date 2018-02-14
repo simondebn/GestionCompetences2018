@@ -189,27 +189,47 @@ $('body').on('submit', '#formModifyPersonne', function(e) {
         myFunction = 'modifyPersonneKeepPassword';
     }
 
-    $.ajax({
-        url: 'personne',
-        type: 'POST',
-        data: {
-            myFunction: myFunction,
-            myParams: {
-                params: params
-            }
-        },
-        success: function (data) {
-            var msg = $.parseJSON(data);
-            if (msg.type == 'success') {
-                $('.modal.form').modal('hide');
-                bootstrapNotify(msg.msg, msg.type);
-                // TODO mettre à jour la liste des personnes
-            }
-            else {
-                bootstrapNotify(msg.msg, msg.type);
+    var ville_is_valide = false;
+    $.each(data_google_matches_current_ville['results'], function(index, values) {
+        if (values['formatted_address'] == params['ville_entreprise']) {
+            var is_city_or_less = false;
+            $.each(values['address_components'], function(indice, item) {
+                if (item['types'].indexOf('locality')) {
+                    is_city_or_less = true;
+                    params['lat_entreprise'] = values['geometry']['location']['lat'];
+                    params['lon_entreprise'] = values['geometry']['location']['lng'];
+                }
+            });
+            if (is_city_or_less) {
+                ville_is_valide = true;
             }
         }
     });
+    if (ville_is_valide && params['ville_entreprise'].trim() != '') {
+        $.ajax({
+            url: 'personne',
+            type: 'POST',
+            data: {
+                myFunction: myFunction,
+                myParams: {
+                    params: params
+                }
+            },
+            success: function (data) {
+                var msg = $.parseJSON(data);
+                if (msg.type == 'success') {
+                    $('.modal.form').modal('hide');
+                    bootstrapNotify(msg.msg, msg.type);
+                    // TODO mettre à jour la liste des personnes
+                }
+                else {
+                    bootstrapNotify(msg.msg, msg.type);
+                }
+            }
+        });
+    } else {
+        //TODO : indiquer sur le formulaire qu'il faut moins une ville de renseignée
+    }
 });
 
 $('body').on('click', 'a', function(e) {
@@ -226,12 +246,46 @@ $('body').on('click', '#addCompetenceForm', function(e) {
 });
 
 /***********Scripts Listes***************/
-var options = {
+
+/**
+* Ajoute les classes de MDBootstrap aux éléments de la pagination générée par List.js
+*/
+function modifyPaginationClasses() {
+   $('.pagination li').addClass('page-item');
+   $('.pagination a').addClass('page-link');
+   $('.page-item:not(.active) a').css('color', 'black');
+}
+$(document).ready(function () {
+   modifyPaginationClasses();
+});
+$('nav').on('click', function () {
+   modifyPaginationClasses();
+});
+$('input').on('change paste keyup', function () {
+   modifyPaginationClasses();
+});
+$('th').on('click', function () {
+   modifyPaginationClasses();
+});
+
+var user_options = {
   valueNames: [ 'nom', 'prenom' ]
-};
+},
+  userList = new List('users', user_options),
 
 var userList = new List('users', options);
 
+
+comp_options = {
+        valueNames: ['competence', 'children'],
+        page: 5,
+        pagination: [{
+                innerWindow: 1,
+                outerWindow: 1,
+            }],
+    },
+  compList = new List('comp', comp_options);
+/*********************************/
 
 /*********************************/
 // GESTION RESET PASSWORD

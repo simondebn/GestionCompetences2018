@@ -1,12 +1,19 @@
 <?php
 
 $error = false;
+$liste = $compModelDb->getAll();
 
 if(isset($_POST['myParams'])){
     foreach ($_POST['myParams']['params'] as $str){
         $str = h($str);
     }
 }
+
+render('competences',[
+    'title' => 'Liste des compétences',
+    'skill_liste' => $liste,
+    'comp_model' => $compModelDb
+]);
 
 /*** GESTION DES COMPETENCES ***/
 

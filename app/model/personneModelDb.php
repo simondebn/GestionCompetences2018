@@ -88,7 +88,7 @@ class personneModelDb
     }
 
     public function modifyNewPassword($modif) {
-        $request = ("UPDATE personne SET nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, nom_entreprise = :nom_entreprise, ville_entreprise = :ville_entreprise, description_projets = :description_projets, password = :password, never_connected = 0 WHERE id = :id ");
+        $request = ("UPDATE personne SET nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, nom_entreprise = :nom_entreprise, ville_entreprise = :ville_entreprise, lat_entreprise = :lat_entreprise, lon_entreprise = :lon_entreprise, description_projets = :description_projets, password = :password, never_connected = 0 WHERE id = :id ");
         $stmt = $this->db->prepare($request);
         $stmt->execute([
             'id' => $modif['id'],
@@ -99,14 +99,18 @@ class personneModelDb
             'description_projets' => $modif['description_projets'],
             'nom_entreprise' => $modif['nom_entreprise'],
             'ville_entreprise' => $modif['ville_entreprise'],
+            'lat_entreprise' => isset($modif['lat_entreprise']) ? $modif['lat_entreprise'] : NULL,
+            'lon_entreprise' => isset($modif['lon_entreprise']) ? $modif['lon_entreprise'] : NULL,
             'password' => $modif['password']
         ]);
 
-        $this->saveCompetences($modif['id'], $modif['competences']);
+        if (isset($modif['competences'])) {
+            $this->saveCompetences($modif['id'], $modif['competences']);
+        }
     }
 
     public function modifyKeepPassword($modif) {
-        $request = ("UPDATE personne SET nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, nom_entreprise = :nom_entreprise, ville_entreprise = :ville_entreprise, description_projets = :description_projets WHERE id = :id ");
+        $request = ("UPDATE personne SET nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, nom_entreprise = :nom_entreprise, ville_entreprise = :ville_entreprise, lat_entreprise = :lat_entreprise, lon_entreprise = :lon_entreprise, description_projets = :description_projets WHERE id = :id ");
         $stmt = $this->db->prepare($request);
         $stmt->execute([
             'id' => $modif['id'],
@@ -117,9 +121,13 @@ class personneModelDb
             'description_projets' => $modif['description_projets'],
             'nom_entreprise' => $modif['nom_entreprise'],
             'ville_entreprise' => $modif['ville_entreprise'],
+            'lat_entreprise' => isset($modif['lat_entreprise']) ? $modif['lat_entreprise'] : NULL,
+            'lon_entreprise' => isset($modif['lon_entreprise']) ? $modif['lon_entreprise'] : NULL,
         ]);
 
-        $this->saveCompetences($modif['id'], $modif['competences']);
+        if (isset($modif['competences'])) {
+            $this->saveCompetences($modif['id'], $modif['competences']);
+        }
 
     }
 

@@ -1,8 +1,7 @@
 <?php
 
 $personnes = $personneModelDb->getAll();
-$competences = $compModelDb->getAll();
-
+$competences = $compModelDb->getMostUsed();
 $users = [];
 $table_skills = [];
 
@@ -32,7 +31,6 @@ if (isset($_SESSION['user_id']) && isset($_POST['myFunction']) && $_POST['myFunc
         'title'   => 'Accueil',
         'users'   => $users,
         'tags' => $competences
-        
     ]);
 } else {
     renderConnexion('home', [

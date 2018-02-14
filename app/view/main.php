@@ -9,7 +9,7 @@
 
     <div class="row mt-3 pt-3">
     <div class="col-md-8">
-        <?php if(isset($recherche) && $recherche != null){ echo "<p align='center' style='padding-top:5px'>Résultat de la recherche pour '$recherche'.</b></p>"; } ?>
+        <?php if(isset($recherche) && $recherche != null){ echo "<p align='center' style='padding-top:5px'>Résultat de la recherche pour '<b id='search_test'>$recherche</b>'.</p>"; } ?>
         <table class="table"id="users">
             <thead>
             <tr>

@@ -1,3 +1,5 @@
+var data_google_matches_current_ville = {};
+
 function addAutoComplete() {
     var ville_autocomplete;
     new autoComplete({
@@ -8,6 +10,7 @@ function addAutoComplete() {
                 url: 'https://maps.googleapis.com/maps/api/geocode/json?key='+ GOOGLE_API_KEY_GEOCODING +'&region=fr&address=' + term,
                 type: 'POST',
                 success: function (data) {
+                    data_google_matches_current_ville = data;
                     var matches = [];
                     $.each(data['results'], function(index, values) {
                         matches.push(values['formatted_address']);
@@ -87,7 +90,7 @@ $('body').on('click', '#modifyPersonne', function () {
     });
 });
 
-$('body').on('click', 'tr', function (e) {
+$('body').on('click', '#users tr', function (e) {
     if (e.target.className != 'badge badge-cefim bagde-list-cefim') {
         $.ajax({
             url: 'main',

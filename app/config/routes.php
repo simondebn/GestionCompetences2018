@@ -9,4 +9,6 @@ $site_pages = [
     'recherche' => 'compList',
     'personne' => 'personne',
     'mail' => 'mail',
+    'competences' => 'comp',
+    'map' => 'map',
 ];
