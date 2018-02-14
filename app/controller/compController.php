@@ -2,6 +2,7 @@
 
 $error = false;
 $liste = $compModelDb->getAll();
+$competences = $compModelDb->getMostUsed();
 
 if(isset($_POST['myParams'])){
     foreach ($_POST['myParams']['params'] as $str){
@@ -12,7 +13,8 @@ if(isset($_POST['myParams'])){
 render('competences',[
     'title' => 'Liste des compétences',
     'skill_liste' => $liste,
-    'comp_model' => $compModelDb
+    'comp_model' => $compModelDb,
+    'tags' => $competences
 ]);
 
 /*** GESTION DES COMPETENCES ***/
