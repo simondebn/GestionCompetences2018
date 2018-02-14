@@ -271,12 +271,17 @@ $('body').on('click', 'th', function () {
 /** Liste Users **/
 
 var user_options = {
-  valueNames: [ 'nom', 'prenom' ]
+  valueNames: [ 'nom', 'prenom' ],
+        page: 5,
+        pagination: [{
+            innerWindow: 1,
+            outerWindow: 1
+        }]
 },
 
 userList = new List('users', user_options);
 
-/** Liste Users **/
+/** Liste compétences **/
 
 var comp_options = {
     valueNames: ['competence', 'children'],
