@@ -7,4 +7,5 @@ $site_pages = [
     'main' => 'main',
     'recherche' => 'compList',
     'personne' => 'personne',
+    'competences' => 'comp'
 ];

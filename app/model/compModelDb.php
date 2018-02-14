@@ -40,12 +40,17 @@ class compModelDb
         return $competences;
     }
     
+    /* renvoie les noms et les id des compétences enfants d'une compétence parent*/
     public function getChildren($id){
-        $stmt = $this->db->prepare("SELECT * FROM competence WHERE id_parent = :id"); 
+        $stmt = $this->db->prepare("SELECT id, nom FROM competence WHERE id_parent = :id"); 
              $stmt->execute([
             'id' => $id
         ]);
-        return $stmt->fetch();
+        $children = [];
+        foreach ($stmt as $p) {
+            $children[$p['id']] = $p;
+        }
+        return $children;
     }
 
     public function getRecherche($string){

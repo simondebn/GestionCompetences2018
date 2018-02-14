@@ -79,3 +79,8 @@ table.table tr{
 .remove_badge {
     padding-left: 5px;
 }
+
+.containerPagination {
+    position: relative;
+    left: 50%;
+}

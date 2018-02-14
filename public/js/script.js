@@ -222,9 +222,40 @@ $('body').on('click', '#addCompetenceForm', function(e) {
 });
 
 /***********Scripts Listes***************/
-var options = {
-  valueNames: [ 'nom', 'prenom' ]
-};
 
-var userList = new List('users', options);
+/**
+* Ajoute les classes de MDBootstrap aux éléments de la pagination générée par List.js
+*/
+function modifyPaginationClasses() {
+   $('.pagination li').addClass('page-item');
+   $('.pagination a').addClass('page-link');
+   $('.page-item:not(.active) a').css('color', 'black');
+}
+$(document).ready(function () {
+   modifyPaginationClasses();
+});
+$('nav').on('click', function () {
+   modifyPaginationClasses();
+});
+$('input').on('change paste keyup', function () {
+   modifyPaginationClasses();
+});
+$('th').on('click', function () {
+   modifyPaginationClasses();
+});
+
+var user_options = {
+  valueNames: [ 'nom', 'prenom' ]
+},
+  userList = new List('users', user_options),
+
+    comp_options = {
+        valueNames: ['competence', 'children'],
+        page: 5,
+        pagination: [{
+                innerWindow: 1,
+                outerWindow: 1,
+            }],
+    },
+  compList = new List('comp', comp_options);
 /*********************************/
