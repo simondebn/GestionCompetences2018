@@ -90,7 +90,7 @@ $('body').on('click', '#modifyPersonne', function () {
     });
 });
 
-$('body').on('click', 'tr', function (e) {
+$('body').on('click', '#users tr', function (e) {
     if (e.target.className != 'badge badge-cefim bagde-list-cefim') {
         $.ajax({
             url: 'main',
