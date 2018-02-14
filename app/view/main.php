@@ -25,7 +25,7 @@
                     echo '<td class="prenom">'.$user['prenom'].'</td>';
                     echo '<td class="competences">';
                     foreach($user_skills as $user_skill){
-                        echo '<a href="" class="badge badge-cefim">'.$user_skill.'</a>';
+                        echo '<a href="" class="badge badge-cefim bagde-list-cefim">'.$user_skill.'</a>';
                     }
                     echo '</td></tr>';
                 }             

@@ -75,7 +75,7 @@ $('body').on('submit', '#form_search', function (e) {
     window.location.href = 'recherche-'+chaine;
 });
 
-$('body').on('click', '.badge', function (e) {
+$('body').on('click', '.bagde-list-cefim', function (e) {
     e.preventDefault();
     var chaine = $(this).text().toLowerCase();
     window.location.href = 'recherche-'+chaine;
