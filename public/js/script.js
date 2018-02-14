@@ -189,27 +189,47 @@ $('body').on('submit', '#formModifyPersonne', function(e) {
         myFunction = 'modifyPersonneKeepPassword';
     }
 
-    $.ajax({
-        url: 'personne',
-        type: 'POST',
-        data: {
-            myFunction: myFunction,
-            myParams: {
-                params: params
-            }
-        },
-        success: function (data) {
-            var msg = $.parseJSON(data);
-            if (msg.type == 'success') {
-                $('.modal.form').modal('hide');
-                bootstrapNotify(msg.msg, msg.type);
-                // TODO mettre à jour la liste des personnes
-            }
-            else {
-                bootstrapNotify(msg.msg, msg.type);
+    var ville_is_valide = false;
+    $.each(data_google_matches_current_ville['results'], function(index, values) {
+        if (values['formatted_address'] == params['ville_entreprise']) {
+            var is_city_or_less = false;
+            $.each(values['address_components'], function(indice, item) {
+                if (item['types'].indexOf('locality')) {
+                    is_city_or_less = true;
+                    params['lat_entreprise'] = values['geometry']['location']['lat'];
+                    params['lon_entreprise'] = values['geometry']['location']['lng'];
+                }
+            });
+            if (is_city_or_less) {
+                ville_is_valide = true;
             }
         }
     });
+    if (ville_is_valide && params['ville_entreprise'].trim() != '') {
+        $.ajax({
+            url: 'personne',
+            type: 'POST',
+            data: {
+                myFunction: myFunction,
+                myParams: {
+                    params: params
+                }
+            },
+            success: function (data) {
+                var msg = $.parseJSON(data);
+                if (msg.type == 'success') {
+                    $('.modal.form').modal('hide');
+                    bootstrapNotify(msg.msg, msg.type);
+                    // TODO mettre à jour la liste des personnes
+                }
+                else {
+                    bootstrapNotify(msg.msg, msg.type);
+                }
+            }
+        });
+    } else {
+        //TODO : indiquer sur le formulaire qu'il faut moins une ville de renseignée
+    }
 });
 
 $('body').on('click', 'a', function(e) {
