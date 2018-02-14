@@ -1,5 +1,5 @@
 function initMap() {
-    if (window.location.pathname.includes('/main')) {
+    if (window.location.pathname.includes('/main') || window.location.pathname.includes('/recherche')) {
         $.ajax({
             url: "main",
             type: 'POST',

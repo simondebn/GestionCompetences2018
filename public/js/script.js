@@ -55,8 +55,22 @@ new autoComplete({
     }
 });
 
-$('body').on('submit', '#form_search, #formPersonne', function (e) {
+$('body').on('submit', '#form_search', function (e) {
     e.preventDefault();
+    var chaine = $("#search")[0].value.toLowerCase();
+    window.location.href = 'recherche-'+chaine;
+});
+
+$('body').on('click', '.badge', function (e) {
+    e.preventDefault();
+    var chaine = $(this).text().toLowerCase();
+    window.location.href = 'recherche-'+chaine;
+});
+
+$('body').on('click', '#search_button', function (e) {
+    e.preventDefault();
+    var chaine = $("#search")[0].value.toLowerCase();
+    window.location.href = 'recherche-'+chaine;
 });
 
 $('body').on('click', '#deconnexion', function (e) {

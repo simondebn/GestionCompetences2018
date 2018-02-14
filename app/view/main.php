@@ -23,7 +23,7 @@
                     echo '<td class="prenom">'.$user['prenom'].'</td>';
                     echo '<td class="competences">';
                     foreach($skills as $skill){
-                        echo '<a href="" class="badge badge-cefim">'.$skill.'</a>'; 
+                        echo '<a class="badge badge-cefim">'.$skill.'</a>';
                     }
                     echo '</td></tr>';
                 }             

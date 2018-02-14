@@ -83,5 +83,22 @@ class personneModelDb
         return $hash == sha1($password);
     }
 
+    public function getRecherche($string){
+        // quand le champ actif sera sur la table competence :
+        //$stmt = $this->db->prepare("SELECT * FROM competence WHERE nom LIKE :string AND actif = 1");
+        $stmt = $this->db->prepare("SELECT lien_personne_comptence.id_personne FROM competence
+        LEFT JOIN lien_personne_comptence ON lien_personne_comptence.id_competence = competence.id
+        LEFT JOIN personne ON lien_personne_comptence.id_personne = personne.id
+        WHERE competence.nom LIKE :string AND lien_personne_comptence.id_personne IS NOT NULL;");
+        $stmt->execute([
+            'string' => '%'.$string.'%'
+        ]);
+        $personnes = [];
+        foreach ($stmt as $c) {
+            $personne = $this->getOne($c['id_personne']);
+            $personnes[$c['id_personne']] = $personne;
+        }
 
+        return $personnes;
+    }
 }
