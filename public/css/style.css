@@ -99,3 +99,9 @@ table.table tr{
     padding: 0.8rem 0.9rem !important;;
     border-radius: 50% !important;;
 }
+
+.badge{
+    font-size: 90%;
+    margin-left: 0.5em !important;
+    margin-bottom: 0.5em !important;
+}

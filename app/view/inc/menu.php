@@ -16,7 +16,7 @@
                 </form>
                 <ul class="navbar-nav">
                     <?php if(isset($_SESSION['compte_admin']) && $_SESSION['compte_admin']): ?>
-                        <li class="nav-item">
+                        <li class="nav-item <?php if (isset($skill_liste)) {echo 'active';} ?>">
                             <a class="nav-link waves-effect waves-light" href="competences">Liste des compétences</a>
                         </li>
                         <li class="nav-item">
