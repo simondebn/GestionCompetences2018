@@ -12,9 +12,10 @@ Simple, rapide et efficace, en quelques clics vous pourrez vous connecter, rempl
 Via Git : 
 `git clone https://github.com/simondebn/GestionCompetences2018.git`
 ## Configuration Requises
-PHP 7
-HTML 5
-CSS 3
+  * PHP 7
+  * HTML 5
+  * CSS 3
+  * Javascript (ECMAScript 6)
 
 
 ## Dépendances 
