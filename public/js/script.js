@@ -131,6 +131,7 @@ $('body').on('click', '#deletePersonne', function(e) {
                 if (msg.type == 'success') {
                     $('.modal.form').modal('hide');
                     bootstrapNotify(msg.msg, msg.type);
+                    location.reload();
                 }
                 else {
                     bootstrapNotify(msg.msg, msg.type);
@@ -163,6 +164,7 @@ $('body').on('submit', '#formAddPersonne', function(e) {
             if (msg.type == 'success') {
                 $('.modal.form').modal('hide');
                 bootstrapNotify(msg.msg, msg.type);
+                location.reload();
             }
             else {
                 bootstrapNotify(msg.msg, msg.type);
@@ -222,7 +224,7 @@ $('body').on('submit', '#formModifyPersonne', function(e) {
                 if (msg.type == 'success') {
                     $('.modal.form').modal('hide');
                     bootstrapNotify(msg.msg, msg.type);
-                    // TODO mettre à jour la liste des personnes
+                    location.reload();
                 }
                 else {
                     bootstrapNotify(msg.msg, msg.type);
@@ -241,9 +243,11 @@ $('body').on('click', 'a', function(e) {
 });
 
 $('body').on('click', '#addCompetenceForm', function(e) {
-    var nom_competence = $('input#competences')[0]['value'];
-    $('#badge_competences').append('<a href="#" class="badge badge-cefim">'+ nom_competence +' <span class="remove_badge">X</span></a>');
-    $('input#competences')[0]['value'] = '';
+    var nom_competence = $('input#competences')[0]['value'].trim();
+    if (nom_competence.length) {
+        $('#badge_competences').append('<a href="#" class="badge badge-cefim">'+ nom_competence +' <span class="remove_badge">X</span></a>');
+        $('input#competences')[0]['value'] = '';
+    }
 });
 
 /***********Scripts Listes***************/
