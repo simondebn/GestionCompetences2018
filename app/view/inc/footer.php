@@ -48,7 +48,7 @@
     <!--Copyright-->
     <div class="footer-copyright">
         <div class="container-fluid">
-            © 2018 Copyright: <a href="https://www.cefim.eu"> Wittgenstein</a>
+            © 2018 Copyright: <a href="https://www.cefim.eu"> WittgenSkills</a> | <a href="https://www.cefim.eu/mentions-legales">Mentions légales</a>
 
         </div>
     </div>
