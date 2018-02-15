@@ -318,7 +318,7 @@ $('body').on('click', 'th', function () {
 
 var user_options = {
   valueNames: [ 'nom', 'prenom' ],
-        page: 5,
+        page: 15,
         pagination: [{
             innerWindow: 1,
             outerWindow: 1
@@ -331,7 +331,7 @@ userList = new List('users', user_options);
 
 var comp_options = {
     valueNames: ['competence', 'children'],
-    page: 5,
+    page: 15,
     pagination: [{
             innerWindow: 1,
             outerWindow: 1
