@@ -7,7 +7,7 @@ function addListenersMapsMarkers(markers) {
 }
 
 function initMap() {
-    var config_google_maps = {
+    let config_google_maps = {
         center: {lat: 47.351861, lng: 0.6613099},
         zoom: 7,
         fullscreenControl: false,
@@ -25,10 +25,10 @@ function initMap() {
                         recherche : $("#search_test").text(),
                     },
                 success: function (data) {
-                    var json = JSON.parse(data);
-                    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                    var markers = [];
-                    var index = 0;
+                    let json = JSON.parse(data);
+                    let labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                    let markers = [];
+                    let index = 0;
                     $.each(json, function (id, values) {
                         markers.push(new google.maps.Marker({
                             position: {
@@ -41,8 +41,8 @@ function initMap() {
                         index++;
                     });
 
-                    var map = new google.maps.Map(document.getElementById('map'), config_google_maps);
-                    var markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+                    let map = new google.maps.Map(document.getElementById('map'), config_google_maps);
+                    let markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 
                     addListenersMapsMarkers(markers);
                 }
@@ -56,10 +56,10 @@ function initMap() {
                         myFunction: 'getAllLocations',
                     },
                 success: function (data) {
-                    var json = JSON.parse(data);
-                    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                    var markers = [];
-                    var index = 0;
+                    let json = JSON.parse(data);
+                    let labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                    let markers = [];
+                    let index = 0;
                     $.each(json, function (id, values) {
                         markers.push(new google.maps.Marker({
                             position: {
@@ -72,8 +72,8 @@ function initMap() {
                         index++;
                     });
 
-                    var map = new google.maps.Map(document.getElementById('map'), config_google_maps);
-                    var markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+                    let map = new google.maps.Map(document.getElementById('map'), config_google_maps);
+                    let markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 
                     addListenersMapsMarkers(markers);
                 }

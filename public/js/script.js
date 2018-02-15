@@ -20,12 +20,12 @@ function bootstrapNotify(msg, type) {
 
 function Rechercher(pChaine) {
 
-    if(pChaine != "") {
+    if(pChaine !== "") {
         window.location.href = 'recherche-' + pChaine;
     } // TODO gestion des espaces
 }
 
-var competence_autocomplete;
+let competence_autocomplete;
 new autoComplete({
     selector: 'input#search',
     source: function(term, response){
@@ -39,7 +39,7 @@ new autoComplete({
                     search: term
                 },
             success: function (data) {
-                var json = $.parseJSON(data);
+                let json = $.parseJSON(data);
                 response(json);
             }
         });
@@ -48,7 +48,7 @@ new autoComplete({
 
 $('body').on('click', '#connexion', function (e) {
     //e.preventDefault();
-    var params = {};
+    let params = {};
 
     params['email'] = $("#email")[0].value;
     params['password'] = $("#password")[0].value;
@@ -64,7 +64,7 @@ $('body').on('click', '#connexion', function (e) {
                 }
             },
         success: function (data) {
-            var msg = JSON.parse(data);
+            let msg = JSON.parse(data);
             if (msg.type == 'success') {
                 window.location.href = "main";
             }
@@ -78,19 +78,19 @@ $('body').on('click', '#connexion', function (e) {
 
 $('body').on('submit', '#form_search', function (e) {
     e.preventDefault();
-    var chaine = $("#search")[0].value.toLowerCase();
+    let chaine = $("#search")[0].value.toLowerCase();
     Rechercher(chaine);
 });
 
 $('body').on('click', '.bagde-list-cefim', function (e) {
     e.preventDefault();
-    var chaine = $(this).text().toLowerCase();
+    let chaine = $(this).text().toLowerCase();
     Rechercher(chaine);
 });
 
 $('body').on('click', '#search_button', function (e) {
     e.preventDefault();
-    var chaine = $("#search")[0].value.toLowerCase();
+    let chaine = $("#search")[0].value.toLowerCase();
     Rechercher(chaine);
 });
 
@@ -109,7 +109,7 @@ $('body').on('click', '#deconnexion', function (e) {
 });
 
 $('body').on('click', '#deleteSkill', function(){
-    console.log($(this).data('id'));
+    //console.log($(this).data('id'));
     $.ajax({url: 'competences',
             type: 'POST',
             data: {
@@ -117,8 +117,8 @@ $('body').on('click', '#deleteSkill', function(){
                 id: $(this).data('id')
             },
             success: function (data) {
-                console.log(data);
-                var msg = $.parseJSON(data);
+                //console.log(data);
+                let msg = $.parseJSON(data);
                 if (msg.type == 'success') {
                     bootstrapNotify(msg.msg, msg.type);
                 }
@@ -129,7 +129,7 @@ $('body').on('click', '#deleteSkill', function(){
 });
 
 $('body').on('click', '#newPasswordPersonne', function(e) {
-    var email = $("#email")[0].value;
+    let email = $("#email")[0].value;
 
     $.ajax({
         url: 'mail',
@@ -139,7 +139,7 @@ $('body').on('click', '#newPasswordPersonne', function(e) {
             myParams: email,
         },
         success: function (data) {
-            var msg = $.parseJSON(data);
+            let msg = $.parseJSON(data);
             if (msg.type == 'success') {
                 bootstrapNotify(msg.msg, msg.type);
             }
@@ -151,11 +151,11 @@ $('body').on('click', '#newPasswordPersonne', function(e) {
 });
 
 $('body').on('click', '#deletePersonne', function(e) {
-    var confirm_message = "Êtes-vous sûr de vouloir supprimer le profil ? Vous allez perdre vos accès à la plateforme.";
+    let confirm_message = "Êtes-vous sûr de vouloir supprimer le profil ? Vous allez perdre vos accès à la plateforme.";
     if ($('#is_admin').length) {
         confirm_message = "Êtes-vous sûr de vouloir supprimer le profil ? L\'utilisateur perdra ses accès à la plateforme.";
     }
-    var response = confirm(confirm_message);
+    let response = confirm(confirm_message);
     if (response) {
         $.ajax({
             url: 'personne',
@@ -165,7 +165,7 @@ $('body').on('click', '#deletePersonne', function(e) {
                 id: $(this).data('id')
             },
             success: function (data) {
-                var msg = $.parseJSON(data);
+                let msg = $.parseJSON(data);
                 if (msg.type == 'success') {
                     $('.modal.form').modal('hide');
                     bootstrapNotify(msg.msg, msg.type);
@@ -183,7 +183,7 @@ $('body').on('submit', '#formAddPersonne', function(e) {
     // TODO gestion du formulaire à corriger : lorsqu'il y a une erreur (champ required non rempli) le formulaire ce vide !!
     e.preventDefault();
 
-    var params = {};
+    let params = {};
     $.each($(this).serializeArray(), function(index, values) {
         params[values['name']] = values['value'];
     });
@@ -198,8 +198,8 @@ $('body').on('submit', '#formAddPersonne', function(e) {
             }
         },
         success: function (data) {
-            var msg = $.parseJSON(data);
-            if (msg.type == 'success') {
+            let msg = $.parseJSON(data);
+            if (msg.type === 'success') {
                 $('.modal.form').modal('hide');
                 bootstrapNotify(msg.msg, msg.type);
                 location.reload();
@@ -214,7 +214,7 @@ $('body').on('submit', '#formAddPersonne', function(e) {
 $('body').on('submit', '#formModifyPersonne', function(e) {
     e.preventDefault();
 
-    var params = {};
+    let params = {};
     $.each($(this).serializeArray(), function(index, values) {
         params[values['name']] = values['value'];
     });
@@ -225,18 +225,18 @@ $('body').on('submit', '#formModifyPersonne', function(e) {
         params['competences'].push($(item)[0]['childNodes'][0]['textContent']);
     });
 
-    var myFunction = 'modifyPersonneNewPassword';
+    let myFunction = 'modifyPersonneNewPassword';
 
     if (! $('#password').length) {
         myFunction = 'modifyPersonneKeepPassword';
     }
 
-    var ville_is_valide = false;
+    let ville_is_valide = false;
     $.each(data_google_matches_current_ville['results'], function(index, values) {
-        if (values['formatted_address'] == params['ville_entreprise']) {
-            var is_city_or_less = false;
+        if (values['formatted_address'] === params['ville_entreprise']) {
+            let is_city_or_less = false;
             $.each(values['address_components'], function(indice, item) {
-                if (item['types'].indexOf('locality') != -1) {
+                if (item['types'].indexOf('locality') !== -1) {
                     is_city_or_less = true;
                     params['lat_entreprise'] = values['geometry']['location']['lat'];
                     params['lon_entreprise'] = values['geometry']['location']['lng'];
@@ -247,14 +247,14 @@ $('body').on('submit', '#formModifyPersonne', function(e) {
             }
         }
     });
-    if (params['ville_entreprise'].trim() == '' || Object.keys(data_google_matches_current_ville).length == 0) {
+    if (params['ville_entreprise'].trim() === '' || Object.keys(data_google_matches_current_ville).length === 0) {
         ville_is_valide = true;
     }
 
-    var form_is_valide = true;
+    let form_is_valide = true;
 
-    if (myFunction == 'modifyPersonneNewPassword') {
-        if (params['password'] != params['password_verif']) {
+    if (myFunction === 'modifyPersonneNewPassword') {
+        if (params['password'] !== params['password_verif']) {
             form_is_valide = false;
             $('#password_verif').addClass('is-invalid');
         }
@@ -275,8 +275,8 @@ $('body').on('submit', '#formModifyPersonne', function(e) {
                 }
             },
             success: function (data) {
-                var msg = $.parseJSON(data);
-                if (msg.type == 'success') {
+                let msg = $.parseJSON(data);
+                if (msg.type === 'success') {
                     $('.modal.form').modal('hide');
                     bootstrapNotify(msg.msg, msg.type);
                     location.reload();
@@ -290,17 +290,17 @@ $('body').on('submit', '#formModifyPersonne', function(e) {
 });
 
 $('body').on('click', 'a', function(e) {
-    if($(this).attr('href') == null || $(this).attr('href') == '#'){
+    if($(this).attr('href') == null || $(this).attr('href') === '#'){
         e.preventDefault();
     }
 });
 
 $('body').on('click', '#addCompetenceForm', function(e) {
-    var nom_competence = $('input#competences')[0]['value'].trim();
+    let nom_competence = $('input#competences')[0]['value'].trim();
     if (nom_competence.length) {
-        var comp_deja_dans_liste = false;
+        let comp_deja_dans_liste = false;
         $.each($('#badge_competences a'), function (index, item) {
-            if ($(item)[0]['childNodes'][0]['data'].trim() == nom_competence) {
+            if ($(item)[0]['childNodes'][0]['data'].trim() === nom_competence) {
                 comp_deja_dans_liste = true;
             }
         });
@@ -309,13 +309,13 @@ $('body').on('click', '#addCompetenceForm', function(e) {
             $('input#competences')[0]['value'] = '';
         } else {
             // TODO erreur formulaire compétence déjà dans la liste
-            console.log('compétence déjà dans la liste');
+            //console.log('compétence déjà dans la liste');
         }
     }
 });
 
 $('body').on('focusout', '#password_verif', function(e) {
-    if ($('#password')[0]['value'] != $('#password_verif')[0]['value']) {
+    if ($('#password')[0]['value'] !== $('#password_verif')[0]['value']) {
         $('#password_verif').addClass('is-invalid');
     } else {
         $('#password_verif').removeClass('is-invalid').addClass('is-valid');
@@ -348,7 +348,7 @@ $('body').on('click', 'th', function () {
 
 /** Liste Users **/
 
-var user_options = {
+let user_options = {
   valueNames: [ 'nom', 'prenom' ],
         page: 15,
         pagination: [{
@@ -361,7 +361,7 @@ userList = new List('users', user_options);
 
 /** Liste compétences **/
 
-var comp_options = {
+let comp_options = {
     valueNames: ['competence', 'children'],
     page: 15,
     pagination: [{
@@ -370,7 +370,7 @@ var comp_options = {
         }]
 };
 
-var compList = new List('comp', comp_options);
+let compList = new List('comp', comp_options);
 
 
 /*********************************/
@@ -424,7 +424,7 @@ $("body").on("click", "#reinitialiser", function(e){
 
     e.preventDefault();
 
-    var email = $("#email_reset_password")[0].value;
+    let email = $("#email_reset_password")[0].value;
 
     $.ajax({
         url: 'mail',
@@ -434,8 +434,8 @@ $("body").on("click", "#reinitialiser", function(e){
             myParams: email,
         },
         success: function (data) {
-            var msg = $.parseJSON(data);
-            if (msg.type == 'success') {
+            let msg = $.parseJSON(data);
+            if (msg.type === 'success') {
                 bootstrapNotify(msg.msg, msg.type);
                 HideResetPasswordForm();
                 $("#password").val("");
@@ -452,7 +452,7 @@ $("body").on("click", "#reinitialiser", function(e){
 $('body').on("submit", "#formResetPassword", function(e){
     e.preventDefault();
 
-    var params = {};
+    let params = {};
 
     params["password"] = $("#password_page_reset")[0].value;
     params["password2"] = $("#password_page_reset2")[0].value;
@@ -466,8 +466,8 @@ $('body').on("submit", "#formResetPassword", function(e){
             myParams: params,
         },
         success: function (data) {
-            var msg = $.parseJSON(data);
-            if (msg.type == 'success') {
+            let msg = $.parseJSON(data);
+            if (msg.type === 'success') {
                 bootstrapNotify(msg.msg, msg.type);
                 window.location.href = "main";
             }

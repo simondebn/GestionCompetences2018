@@ -1,8 +1,8 @@
-var data_google_matches_current_ville = {};
+let data_google_matches_current_ville = {};
 
 function addAutoComplete() {
     data_google_matches_current_ville = {};
-    var ville_autocomplete;
+    let ville_autocomplete;
     new autoComplete({
         selector: 'input#ville_entreprise',
         source: function(term, response){
@@ -12,7 +12,7 @@ function addAutoComplete() {
                 type: 'POST',
                 success: function (data) {
                     data_google_matches_current_ville = data;
-                    var matches = [];
+                    let matches = [];
                     $.each(data['results'], function(index, values) {
                         matches.push(values['formatted_address']);
                     });
@@ -21,7 +21,7 @@ function addAutoComplete() {
             });
         }
     });
-    var competence_autocomplete_form;
+    let competence_autocomplete_form;
     new autoComplete({
         selector: 'input#competences',
         source: function(term, response){
@@ -35,7 +35,7 @@ function addAutoComplete() {
                         search: term
                     },
                 success: function (data) {
-                    var json = $.parseJSON(data);
+                    let json = $.parseJSON(data);
                     response(json);
                 }
             });
@@ -61,7 +61,7 @@ function displayModalPersonne(json) {
 }
 
 $('body').on('click', '#addPersonne', function () {
-    var json = {
+    let json = {
         contexte: 'creation',
         modal_title: 'Création d\'un nouvel utilisateur'
     };
@@ -77,7 +77,7 @@ $('body').on('click', '#modifyPersonne', function () {
             user_id: ''
         },
         success: function(data) {
-            var json = {
+            let json = {
                 contexte: 'modification',
                 modal_title: 'Modification du profil',
                 user_values: $.parseJSON(data),
@@ -106,7 +106,7 @@ function modalClicList($id) {
             user_id: $id
         },
         success: function(data) {
-            var json = {
+            let json = {
                 contexte: 'consultation',
                 modal_title: 'Consultation',
                 prevent_delete: 0
@@ -126,7 +126,7 @@ function modalClicList($id) {
 }
 
 $('body').on('click', '.badge', function (e) {
-    if (e.target.className == 'remove_badge') {
+    if (e.target.className === 'remove_badge') {
         e.preventDefault();
         $(this).remove();
     }
@@ -142,7 +142,7 @@ if ($('#open_modal').length) {
             user_id: ''
         },
         success: function(data) {
-            var json = {
+            let json = {
                 contexte: 'first_connexion',
                 modal_title: 'Première Connexion',
                 user_values: $.parseJSON(data),
