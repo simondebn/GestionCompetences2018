@@ -94,3 +94,8 @@ table.table tr{
 .mb-perso{
     margin-bottom: 10rem!important;
 }
+
+.btn.btn-sm {
+    padding: 0.8rem 0.9rem !important;;
+    border-radius: 50% !important;;
+}
