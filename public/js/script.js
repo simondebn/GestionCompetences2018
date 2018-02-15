@@ -111,6 +111,26 @@ $('body').on('click', '#deconnexion', function (e) {
     });
 });
 
+$('body').on('click', '#deleteSkill', function(){
+    console.log($(this).data('id'));
+    $.ajax({url: 'competences',
+            type: 'POST',
+            data: {
+                myFunction: 'deleteCompetence',
+                id: $(this).data('id')
+            },
+            success: function (data) {
+                console.log(data);
+                var msg = $.parseJSON(data);
+                if (msg.type == 'success') {
+                    bootstrapNotify(msg.msg, msg.type);
+                }
+                else {
+                    bootstrapNotify(msg.msg, msg.type);
+                }
+            }});
+});
+
 $('body').on('click', '#deletePersonne', function(e) {
     var confirm_message = "Êtes-vous sûr de vouloir supprimer le profil ? Vous allez perdre vos accès à la plateforme.";
     if ($('#is_admin').length) {

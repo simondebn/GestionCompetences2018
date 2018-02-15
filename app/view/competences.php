@@ -12,7 +12,7 @@
             <tbody class="list">
             <?php 
                 foreach($skill_liste as $s){
-                    echo '<tr data-id="'.$s['id'] .'"><td class="competence"><a href="" class="badge badge-cefim bagde-list-cefim">'.$s['nom'].'</td></a>';
+                    echo '<tr><td class="competence"><a href="" class="badge badge-cefim bagde-list-cefim">'.$s['nom'].'</td></a>';
                     echo '<td class="children">';
                     $children = getChildrenCompetence($s['id'], $comp_model);
                     if(!empty($children)){
@@ -21,7 +21,7 @@
                         }
                     }
                     echo '</td><td class="actions">';
-                    echo '<button type="button" class="btn btn-sm btn-amber" id="deleteSkill"><i class="fa fa-trash" style="font-size:24px;"></i></button>';
+                    echo '<button type="button" class="btn btn-sm btn-amber" id="deleteSkill" data-id="'.$s['id'] .'"><i class="fa fa-trash" style="font-size:24px;"></i></button>';
                     echo '</td></tr>';
                 }             
                 ?>
