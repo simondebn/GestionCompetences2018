@@ -46,8 +46,8 @@ function addPersonne($params, $personneModelDb)
 }
 
 if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'addPersonne') {
-    // TODO généger un mot de passe aléatoire
-    $_POST['myParams']['params']['password'] = sha1('dadfba16');
+    $mdp = GenPassword(6);
+    $_POST['myParams']['params']['password'] = sha1($mdp);
     try {
         $personneModelDb->add($_POST['myParams']['params']);
     } catch (PDOException $e) {
@@ -59,7 +59,15 @@ if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'addPersonne') {
     }
 
     if ($error === false) {
-        // TODO envoyer mail au nouvel utilisateur
+        $mailer = ConnectSmtp();
+
+        $message = (new Swift_Message('Création de votre compte sur la plateforme Gestion des Compétences'))
+            ->setFrom(['contact@wittgenstein.fr' => 'Support Wittgenstein'])
+            ->setTo([$_POST['myParams']['params']['email']])
+            ->setBody('Bienvenue sur la plateforme de gestion des compétences. Voici vos accès : identifiant : '. $_POST['myParams']['params']['email'] .'mot de passe : '. $mdp);
+
+        $result = $mailer->send($message);
+
         echo json_encode(array(
             'type' => 'success',
             'msg' => 'Le nouvel utilicateur a été créé !',

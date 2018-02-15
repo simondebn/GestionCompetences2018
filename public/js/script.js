@@ -111,6 +111,48 @@ $('body').on('click', '#deconnexion', function (e) {
     });
 });
 
+$('body').on('click', '#deleteSkill', function(){
+    console.log($(this).data('id'));
+    $.ajax({url: 'competences',
+            type: 'POST',
+            data: {
+                myFunction: 'deleteCompetence',
+                id: $(this).data('id')
+            },
+            success: function (data) {
+                console.log(data);
+                var msg = $.parseJSON(data);
+                if (msg.type == 'success') {
+                    bootstrapNotify(msg.msg, msg.type);
+                }
+                else {
+                    bootstrapNotify(msg.msg, msg.type);
+                }
+            }});
+});
+
+$('body').on('click', '#newPasswordPersonne', function(e) {
+    var email = $("#email")[0].value;
+
+    $.ajax({
+        url: 'mail',
+        type: 'POST',
+        data: {
+            myFunction: "resetPassword",
+            myParams: email,
+        },
+        success: function (data) {
+            var msg = $.parseJSON(data);
+            if (msg.type == 'success') {
+                bootstrapNotify(msg.msg, msg.type);
+            }
+            else {
+                bootstrapNotify(msg.msg, msg.type);
+            }
+        }
+    });
+});
+
 $('body').on('click', '#deletePersonne', function(e) {
     var confirm_message = "Êtes-vous sûr de vouloir supprimer le profil ? Vous allez perdre vos accès à la plateforme.";
     if ($('#is_admin').length) {
@@ -130,6 +172,7 @@ $('body').on('click', '#deletePersonne', function(e) {
                 if (msg.type == 'success') {
                     $('.modal.form').modal('hide');
                     bootstrapNotify(msg.msg, msg.type);
+                    location.reload();
                 }
                 else {
                     bootstrapNotify(msg.msg, msg.type);
@@ -162,6 +205,7 @@ $('body').on('submit', '#formAddPersonne', function(e) {
             if (msg.type == 'success') {
                 $('.modal.form').modal('hide');
                 bootstrapNotify(msg.msg, msg.type);
+                location.reload();
             }
             else {
                 bootstrapNotify(msg.msg, msg.type);
@@ -221,7 +265,7 @@ $('body').on('submit', '#formModifyPersonne', function(e) {
                 if (msg.type == 'success') {
                     $('.modal.form').modal('hide');
                     bootstrapNotify(msg.msg, msg.type);
-                    // TODO mettre à jour la liste des personnes
+                    location.reload();
                 }
                 else {
                     bootstrapNotify(msg.msg, msg.type);
@@ -240,9 +284,11 @@ $('body').on('click', 'a', function(e) {
 });
 
 $('body').on('click', '#addCompetenceForm', function(e) {
-    var nom_competence = $('input#competences')[0]['value'];
-    $('#badge_competences').append('<a href="#" class="badge badge-cefim">'+ nom_competence +' <span class="remove_badge">X</span></a>');
-    $('input#competences')[0]['value'] = '';
+    var nom_competence = $('input#competences')[0]['value'].trim();
+    if (nom_competence.length) {
+        $('#badge_competences').append('<a href="#" class="badge badge-cefim">'+ nom_competence +' <span class="remove_badge">X</span></a>');
+        $('input#competences')[0]['value'] = '';
+    }
 });
 
 /***********Scripts Listes***************/
