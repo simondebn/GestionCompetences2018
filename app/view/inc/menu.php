@@ -23,7 +23,7 @@
                             <a class="nav-link waves-effect waves-light" href="#" id="addPersonne">Ajouter un utilisateur</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link waves-effect waves-light" href="#">Import csv</a>
+                            <a class="nav-link waves-effect waves-light disabled" href="#">Import csv</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link waves-effect waves-light" href="#" id="modifyPersonne">Modifier son profil</a>

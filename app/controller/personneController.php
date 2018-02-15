@@ -51,10 +51,17 @@ if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'addPersonne') {
     try {
         $personneModelDb->add($_POST['myParams']['params']);
     } catch (PDOException $e) {
-        echo json_encode(array(
-            'type' => 'danger',
-            'msg' => 'Une erreur est survenue !'
-        ));
+        if ($e->errorInfo[2] === "Duplicate entry 'a@b.c' for key 'email_UNIQUE'") {
+            echo json_encode(array(
+                'type' => 'danger',
+                'msg' => 'Cet email est déjà enregistré dans la base de données'
+            ));
+        } else {
+            echo json_encode(array(
+                'type' => 'danger',
+                'msg' => 'Une erreur est survenue !'
+            ));
+        }
         $error = true;
     }
 
