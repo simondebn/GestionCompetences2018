@@ -30,7 +30,7 @@
 
         </table>
         
-        <div class = "row containerPaginationComp mb-5">
+        <div class = "row containerPagination mb-5">
             <nav class = "text-center">
                 <ul class='pagination pagination-circle pg-amber mb-0'></ul>
             </nav>

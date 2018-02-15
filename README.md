@@ -1,5 +1,4 @@
 # WittgenSkills (EN)
-
 ##### Wittgenstein Group
  
 Welcome dear user, you have in your hands WittgenSkills an innovative and unique application.
