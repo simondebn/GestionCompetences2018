@@ -1,6 +1,7 @@
 var data_google_matches_current_ville = {};
 
 function addAutoComplete() {
+    data_google_matches_current_ville = {};
     var ville_autocomplete;
     new autoComplete({
         selector: 'input#ville_entreprise',
@@ -107,7 +108,7 @@ $('body').on('click', '#users tr', function (e) {
                 };
                 if ($('#is_admin').length) {
                     json = {
-                        contexte: 'modification',
+                        contexte: 'modification_sans_mdp',
                         modal_title: 'Consultation / Modification',
                         prevent_delete: 0
                     };

@@ -53,8 +53,6 @@ $('body').on('click', '#connexion', function (e) {
     params['email'] = $("#email")[0].value;
     params['password'] = $("#password")[0].value;
 
-    console.log(params);
-
     $.ajax({
         url: "connexion",
         type: 'POST',
@@ -66,7 +64,6 @@ $('body').on('click', '#connexion', function (e) {
                 }
             },
         success: function (data) {
-            console.log(data);
             var msg = JSON.parse(data);
             if (msg.type == 'success') {
                 window.location.href = "main";
@@ -219,7 +216,7 @@ $('body').on('submit', '#formModifyPersonne', function(e) {
         if (values['formatted_address'] == params['ville_entreprise']) {
             var is_city_or_less = false;
             $.each(values['address_components'], function(indice, item) {
-                if (item['types'].indexOf('locality')) {
+                if (item['types'].indexOf('locality') != -1) {
                     is_city_or_less = true;
                     params['lat_entreprise'] = values['geometry']['location']['lat'];
                     params['lon_entreprise'] = values['geometry']['location']['lng'];
@@ -230,7 +227,24 @@ $('body').on('submit', '#formModifyPersonne', function(e) {
             }
         }
     });
-    if (ville_is_valide || params['ville_entreprise'].trim() != '' || !data_google_matches_current_ville.length) {
+    if (params['ville_entreprise'].trim() == '' || Object.keys(data_google_matches_current_ville).length == 0) {
+        ville_is_valide = true;
+    }
+
+    var form_is_valide = true;
+
+    if (myFunction == 'modifyPersonneNewPassword') {
+        if (params['password'] != params['password_verif']) {
+            form_is_valide = false;
+            $('#password_verif').addClass('is-invalid');
+        }
+    }
+    if ( ! ville_is_valide) {
+        form_is_valide = false;
+        $('#ville_entreprise').addClass('is-invalid');
+    }
+
+    if (form_is_valide) {
         $.ajax({
             url: 'personne',
             type: 'POST',
@@ -252,8 +266,6 @@ $('body').on('submit', '#formModifyPersonne', function(e) {
                 }
             }
         });
-    } else {
-        //TODO : indiquer sur le formulaire qu'il faut moins une ville de renseignée
     }
 });
 
@@ -266,8 +278,28 @@ $('body').on('click', 'a', function(e) {
 $('body').on('click', '#addCompetenceForm', function(e) {
     var nom_competence = $('input#competences')[0]['value'].trim();
     if (nom_competence.length) {
-        $('#badge_competences').append('<a href="#" class="badge badge-cefim">'+ nom_competence +' <span class="remove_badge">X</span></a>');
-        $('input#competences')[0]['value'] = '';
+        var comp_deja_dans_liste = false;
+        $.each($('#badge_competences a'), function (index, item) {
+            if ($(item)[0]['childNodes'][0]['data'].trim() == nom_competence) {
+                comp_deja_dans_liste = true;
+            }
+        });
+        if ( ! comp_deja_dans_liste) {
+            $('#badge_competences').append('<a href="#" class="badge badge-cefim">'+ nom_competence +' <span class="remove_badge">X</span></a>');
+            $('input#competences')[0]['value'] = '';
+        } else {
+            // TODO erreur formulaire compétence déjà dans la liste
+            console.log('compétence déjà dans la liste');
+        }
+    }
+});
+
+$('body').on('focusout', '#password_verif', function(e) {
+    if ($('#password')[0]['value'] != $('#password_verif')[0]['value']) {
+        $('#password_verif').addClass('is-invalid');
+    } else {
+        $('#password_verif').removeClass('is-invalid').addClass('is-valid');
+        $('#password').addClass('is-valid');
     }
 });
 
