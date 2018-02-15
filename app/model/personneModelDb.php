@@ -244,6 +244,6 @@ class personneModelDb
         $stmt->execute([
             'email' => $email,
         ]);
-        return $stmt->fetch();
+        return $stmt->fetch()['password'];
     }
 }

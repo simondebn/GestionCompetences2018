@@ -52,7 +52,7 @@ table .badge-cefim:hover{
     color:white; !important;
 }
 .badge{
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.16), 0 2px 5px 0 rgba(0,0,0,.12)
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.16), 0 2px 5px 0 rgba(0,0,0,.12);
 }
 
 table.table a{
@@ -86,6 +86,16 @@ table.table tr{
     left: 50%;
 }
 
+.containerPaginationComp {
+    position: relative;
+    left: 40%;
+}
+
 .mb-perso{
     margin-bottom: 10rem!important;
+}
+
+.btn.btn-sm {
+    padding: 0.8rem 0.9rem !important;;
+    border-radius: 50% !important;;
 }

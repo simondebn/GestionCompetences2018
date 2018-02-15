@@ -108,6 +108,26 @@ $('body').on('click', '#deconnexion', function (e) {
     });
 });
 
+$('body').on('click', '#deleteSkill', function(){
+    console.log($(this).data('id'));
+    $.ajax({url: 'competences',
+            type: 'POST',
+            data: {
+                myFunction: 'deleteCompetence',
+                id: $(this).data('id')
+            },
+            success: function (data) {
+                console.log(data);
+                var msg = $.parseJSON(data);
+                if (msg.type == 'success') {
+                    bootstrapNotify(msg.msg, msg.type);
+                }
+                else {
+                    bootstrapNotify(msg.msg, msg.type);
+                }
+            }});
+});
+
 $('body').on('click', '#newPasswordPersonne', function(e) {
     var email = $("#email")[0].value;
 
@@ -330,7 +350,7 @@ $('body').on('click', 'th', function () {
 
 var user_options = {
   valueNames: [ 'nom', 'prenom' ],
-        page: 5,
+        page: 15,
         pagination: [{
             innerWindow: 1,
             outerWindow: 1
@@ -343,7 +363,7 @@ userList = new List('users', user_options);
 
 var comp_options = {
     valueNames: ['competence', 'children'],
-    page: 5,
+    page: 15,
     pagination: [{
             innerWindow: 1,
             outerWindow: 1

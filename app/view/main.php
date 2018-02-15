@@ -34,7 +34,7 @@
             </tbody>
         </table>
 
-        <div class = "row containerPagination">
+        <div class = "row containerPagination mb-5">
             <nav class = "text-center">
                 <ul class='pagination pagination-circle pg-amber mb-0'></ul>
             </nav>

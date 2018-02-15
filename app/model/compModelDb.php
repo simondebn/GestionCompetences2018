@@ -18,7 +18,7 @@ class compModelDb
     }
     
     public function getAll() {
-        $stmt = $this->db->prepare("SELECT * FROM competence");
+        $stmt = $this->db->prepare("SELECT * FROM competence where actif = 1");
         $stmt->execute();
 
         $competences = [];
@@ -72,16 +72,12 @@ class compModelDb
     }
 
     public function delete($id) {
-        /* $stmt = $this->db->prepare("DELETE FROM competence WHERE id = :id");
-        $stmt->execute([
-            'id' => $id
-        ]);*/
-        
         $request = ("UPDATE competence SET actif = 0 WHERE id = :id");
         $stmt = $this->db->prepare($request);
         $stmt->execute([
             'id' => $id
         ]);
+        
         $request = ("UPDATE competence SET id_parent = 0 WHERE id_parent = :id");
         $stmt = $this->db->prepare($request);
         $stmt->execute([
