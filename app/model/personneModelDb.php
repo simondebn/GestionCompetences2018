@@ -81,7 +81,7 @@ class personneModelDb
     }
 
     public function delete($id) {
-        $stmt = $this->db->prepare("UPDATE personne SET active = 0 WHERE id = :id");
+        $stmt = $this->db->prepare("UPDATE personne SET active = 0, email = '' WHERE id = :id");
         $stmt->execute([
             'id' => $id
         ]);
@@ -101,7 +101,7 @@ class personneModelDb
             'ville_entreprise' => $modif['ville_entreprise'],
             'lat_entreprise' => isset($modif['lat_entreprise']) ? $modif['lat_entreprise'] : NULL,
             'lon_entreprise' => isset($modif['lon_entreprise']) ? $modif['lon_entreprise'] : NULL,
-            'password' => $modif['password']
+            'password' => sha1($modif['password'])
         ]);
 
         if (isset($modif['competences'])) {
