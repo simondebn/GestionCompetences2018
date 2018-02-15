@@ -19,19 +19,20 @@ if(isset($_POST['myFunction']) && $_POST['myFunction'] === 'resetPassword'){
             $personneModelDb->changePassword($_POST["myParams"]["email"], $password_page_reset);
             echo json_encode(array(
                 'type' => 'success',
-                'msg' => 'Mot de passe modifié !'
+                'msg' => 'Mot de passe modifié !',
+                'email' => $_POST["myParams"]["email"]
             ));
         }
         else{
             echo json_encode(array(
-                'type' => 'error',
-                'msg' => 'Error !'
+                'type' => 'danger',
+                'msg' => 'Ne pas mettre un mot de passe identique à l\'ancien !'
             ));
         }
     }
     else{
         echo json_encode(array(
-            'type' => 'error',
+            'type' => 'danger',
             'msg' => 'Les deux mot de passe ne sont pas identiques !'
         ));
     }
