@@ -18,6 +18,34 @@ function bootstrapNotify(msg, type) {
     });
 }
 
+function Rechercher(pChaine) {
+
+    if(pChaine != "") {
+        window.location.href = 'recherche-' + pChaine;
+    } // TODO gestion des espaces
+}
+
+var competence_autocomplete;
+new autoComplete({
+    selector: 'input#search',
+    source: function(term, response){
+        try { competence_autocomplete.abort(); } catch(e){}
+        competence_autocomplete = $.ajax({
+            url: 'main',
+            type: 'POST',
+            data:
+                {
+                    myFunction: 'autoCompleteCompetence',
+                    search: term
+                },
+            success: function (data) {
+                var json = $.parseJSON(data);
+                response(json);
+            }
+        });
+    }
+});
+
 $('body').on('click', '#connexion', function (e) {
     //e.preventDefault();
     var params = {};
@@ -51,32 +79,6 @@ $('body').on('click', '#connexion', function (e) {
 
 });
 
-var competence_autocomplete;
-new autoComplete({
-    selector: 'input#search',
-    source: function(term, response){
-        try { competence_autocomplete.abort(); } catch(e){}
-        competence_autocomplete = $.ajax({
-            url: 'main',
-            type: 'POST',
-            data:
-                {
-                    myFunction: 'autoCompleteCompetence',
-                    search: term
-                },
-            success: function (data) {
-                var json = $.parseJSON(data);
-                response(json);
-            }
-        });
-    }
-});
-
-function Rechercher(pChaine) {
-    if(pChaine != "")
-        window.location.href = 'recherche-'+pChaine; // TODO gestion des espaces
-}
-
 $('body').on('submit', '#form_search', function (e) {
     e.preventDefault();
     var chaine = $("#search")[0].value.toLowerCase();
@@ -109,6 +111,34 @@ $('body').on('click', '#deconnexion', function (e) {
     });
 });
 
+$('body').on('click', '#deletePersonne', function(e) {
+    var confirm_message = "Êtes-vous sûr de vouloir supprimer le profil ? Vous allez perdre vos accès à la plateforme.";
+    if ($('#is_admin').length) {
+        confirm_message = "Êtes-vous sûr de vouloir supprimer le profil ? L\'utilisateur perdra ses accès à la plateforme.";
+    }
+    var response = confirm(confirm_message);
+    if (response) {
+        $.ajax({
+            url: 'personne',
+            type: 'POST',
+            data: {
+                myFunction: 'deletePersonne',
+                id: $(this).data('id')
+            },
+            success: function (data) {
+                var msg = $.parseJSON(data);
+                if (msg.type == 'success') {
+                    $('.modal.form').modal('hide');
+                    bootstrapNotify(msg.msg, msg.type);
+                }
+                else {
+                    bootstrapNotify(msg.msg, msg.type);
+                }
+            }
+        });
+    }
+});
+
 $('body').on('submit', '#formAddPersonne', function(e) {
     // TODO gestion du formulaire à corriger : lorsqu'il y a une erreur (champ required non rempli) le formulaire ce vide !!
     e.preventDefault();
@@ -138,34 +168,6 @@ $('body').on('submit', '#formAddPersonne', function(e) {
             }
         }
     });
-});
-
-$('body').on('click', '#deletePersonne', function(e) {
-    var confirm_message = "Êtes-vous sûr de vouloir supprimer le profil ? Vous allez perdre vos accès à la plateforme.";
-    if ($('#is_admin').length) {
-        confirm_message = "Êtes-vous sûr de vouloir supprimer le profil ? L\'utilisateur perdra ses accès à la plateforme.";
-    }
-    var response = confirm(confirm_message);
-    if (response) {
-        $.ajax({
-            url: 'personne',
-            type: 'POST',
-            data: {
-                myFunction: 'deletePersonne',
-                id: $(this).data('id')
-            },
-            success: function (data) {
-                var msg = $.parseJSON(data);
-                if (msg.type == 'success') {
-                    $('.modal.form').modal('hide');
-                    bootstrapNotify(msg.msg, msg.type);
-                }
-                else {
-                    bootstrapNotify(msg.msg, msg.type);
-                }
-            }
-        });
-    }
 });
 
 $('body').on('submit', '#formModifyPersonne', function(e) {
@@ -204,7 +206,7 @@ $('body').on('submit', '#formModifyPersonne', function(e) {
             }
         }
     });
-    if (ville_is_valide && params['ville_entreprise'].trim() != '') {
+    if (ville_is_valide || params['ville_entreprise'].trim() != '' || !data_google_matches_current_ville.length) {
         $.ajax({
             url: 'personne',
             type: 'POST',
@@ -232,10 +234,9 @@ $('body').on('submit', '#formModifyPersonne', function(e) {
 });
 
 $('body').on('click', 'a', function(e) {
-    if($(this).attr('href') == null){
+    if($(this).attr('href') == null || $(this).attr('href') == '#'){
         e.preventDefault();
     }
-
 });
 
 $('body').on('click', '#addCompetenceForm', function(e) {
@@ -305,6 +306,16 @@ $(document).ready(function() {
 
 });
 
+function HideResetPasswordForm(){
+    $("#connexion").show();
+    $("#connexion").removeAttr("disabled");
+    $("#reinitialiser").hide();
+    $("#reinitialiser").attr("disabled", true);
+    $("#passwordForm").hide();
+    $("#email").removeAttr("disabled");
+    $("#password").removeAttr("disabled");
+}
+
 $("body").on("click", "#resetPassword", function(){
 
     if($("#connexion").is(":visible")){
@@ -314,14 +325,11 @@ $("body").on("click", "#resetPassword", function(){
         $("#reinitialiser").show();
         $("#reinitialiser").removeAttr("disabled");
         $("#passwordForm").show();
+        $("#email").attr("disabled", true);
+        $("#password").attr("disabled", true);
     }
     else{
-
-        $("#connexion").show();
-        $("#connexion").removeAttr("disabled");
-        $("#reinitialiser").hide();
-        $("#reinitialiser").attr("disabled", true);
-        $("#passwordForm").hide();
+        HideResetPasswordForm();
     }
 
 
@@ -351,6 +359,9 @@ $("body").on("click", "#reinitialiser", function(e){
             var msg = $.parseJSON(data);
             if (msg.type == 'success') {
                 bootstrapNotify(msg.msg, msg.type);
+                HideResetPasswordForm();
+                $("#password").val("");
+                $("#email").val(email);
             }
             else {
                 bootstrapNotify(msg.msg, msg.type);
@@ -358,4 +369,33 @@ $("body").on("click", "#reinitialiser", function(e){
         }
     });
 
-})
+});
+
+$('body').on("submit", "#formResetPassword", function(e){
+    e.preventDefault();
+
+    var params = {};
+
+    params["password"] = $("#password_page_reset")[0].value;
+    params["password2"] = $("#password_page_reset2")[0].value;
+    params["email"] = $("#email_page_reset")[0].value;
+
+    $.ajax({
+        url: 'reset',
+        type: 'POST',
+        data: {
+            myFunction: "resetPassword",
+            myParams: params,
+        },
+        success: function (data) {
+            var msg = $.parseJSON(data);
+            if (msg.type == 'success') {
+                bootstrapNotify(msg.msg, msg.type);
+                window.location.href = "main";
+            }
+            else {
+                bootstrapNotify(msg.msg, msg.type);
+            }
+        }
+    });
+});

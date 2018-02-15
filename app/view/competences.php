@@ -1,5 +1,5 @@
 <main class="py-5">
-    <div class="row mt-3 pt-3">
+    <div class="row mt-3 pt-3 mb-perso">
     <div class="col-md-8" id="comp">
         <table class="table">
             <thead>

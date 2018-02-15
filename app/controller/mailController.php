@@ -7,10 +7,9 @@
  */
 if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'resetPassword') {
 
-    $newPassword = GenPassword(6);
-    $newPasswordSha1 = sha1($newPassword);
+    $cle = sha1(time() + $_POST['myParams']);
 
-    $personneModelDb->changePassword($newPasswordSha1, $_POST['myParams']);
+    $personneModelDb->resetPassword($_POST['myParams'], $cle);
 
     $mailer = ConnectSmtp();
 
@@ -18,7 +17,7 @@ if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'resetPassword') {
     $message = (new Swift_Message('Réinitialisation de votre mot de passe !'))
         ->setFrom(['contact@wittgenstein.fr' => 'Support Wittgenstein'])
         ->setTo([$_POST['myParams']])
-        ->setBody('Votre nouveau mdp : '.$newPassword);
+        ->setBody('lien : '.$cle);
 
     // Send the message
     $result = $mailer->send($message);

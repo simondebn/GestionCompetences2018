@@ -112,6 +112,7 @@ if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'modifyPersonneNewPa
         $error = true;
     }
     if ($error === false) {
+        $_SESSION['open_modal'] = false;
         echo json_encode(array(
             'type' => 'success',
             'msg' => 'Votre modification a été enregistrée !',
