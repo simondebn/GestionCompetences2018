@@ -150,6 +150,7 @@ $('body').on('click', '#newPasswordPersonne', function(e) {
                 bootstrapNotify(msg.msg, msg.type);
             }
         }
+    });
 });
 
 $('body').on('click', '#deletePersonne', function(e) {

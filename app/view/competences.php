@@ -1,6 +1,6 @@
 <main class="py-5">
-    <div class="row mt-3 pt-3 mb-perso">
-    <div class="col-md-8" id="comp">
+    <div class="row mt-3 pt-3 mb-perso" id="comp">
+
         <table class="table">
             <thead>
             <tr>
@@ -27,20 +27,16 @@
                 ?>
                
             </tbody>
-           
+
         </table>
         
-        <div class = "row containerPagination">
+        <div class = "row containerPaginationComp mb-5">
             <nav class = "text-center">
                 <ul class='pagination pagination-circle pg-amber mb-0'></ul>
             </nav>
         </div>
-        
+
     </div>
-    <div class="col-md-4" data-spy="affix" data-offset-top="100" data-offset-bottom="150">
-        <div id="map"></div>
-    </div>
-</div>
 
     <div class="modal fade form" role="dialog" aria-labelledby="test" aria-hidden="true">
         <div class="modal-dialog modal-lg"></div>
