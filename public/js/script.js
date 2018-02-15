@@ -109,7 +109,6 @@ $('body').on('click', '#deconnexion', function (e) {
             window.location.href = 'accueil';
         }
     });
-
 });
 
 $('body').on('click', '#deletePersonne', function(e) {
