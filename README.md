@@ -1,4 +1,4 @@
-# WittgenSkills
+# WittgenSkills (EN)
 
 ##### Wittgenstein Group
  
@@ -34,7 +34,7 @@ All dependencies are bundled in the project. However, you can find them all belo
   * [Swift Mailer](https://swiftmailer.symfony.com/) v6.0.2
   
 
-
+# WittgenSkills (FR)
 ##### Groupe Wittgenstein
  
 Bienvenue cher utilisateur, vous avez entre les mains, WittgenSkills une application novatrice et unique en son genre.
