@@ -35,7 +35,8 @@ function initMap() {
                                 lat: parseFloat(values['lat_entreprise']),
                                 lng: parseFloat(values['lon_entreprise'])
                             },
-                            data_id: id
+                            data_id: id,
+                            title: values['prenom'] + ' ' + values['nom']
                             //label: labels[index % labels.length]
                         }));
                         index++;
@@ -66,7 +67,8 @@ function initMap() {
                                 lat: parseFloat(values['lat_entreprise']),
                                 lng: parseFloat(values['lon_entreprise'])
                             },
-                            data_id: id
+                            data_id: id,
+                            title: values['prenom'] + ' ' + values['nom']
                             //label: labels[index % labels.length]
                         }));
                         index++;
