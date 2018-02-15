@@ -93,32 +93,37 @@ $('body').on('click', '#modifyPersonne', function () {
 
 $('body').on('click', '#users tr', function (e) {
     if (e.target.className != 'badge badge-cefim bagde-list-cefim') {
-        $.ajax({
-            url: 'main',
-            type: 'POST',
-            data: {
-                myFunction: 'modalModifyPersonne',
-                user_id: $(this).data('id')
-            },
-            success: function(data) {
-                var json = {
-                    contexte: 'consultation',
-                    modal_title: 'Consultation',
-                    prevent_delete: 0
-                };
-                if ($('#is_admin').length) {
-                    json = {
-                        contexte: 'modification_sans_mdp',
-                        modal_title: 'Consultation / Modification',
-                        prevent_delete: 0
-                    };
-                }
-                json['user_values'] = $.parseJSON(data);
-                displayModalPersonne(json);
-            }
-        });
+        modalClicList($(this).data('id'));
     }
 });
+
+function modalClicList($id) {
+    $.ajax({
+        url: 'main',
+        type: 'POST',
+        data: {
+            myFunction: 'modalModifyPersonne',
+            user_id: $id
+        },
+        success: function(data) {
+            var json = {
+                contexte: 'consultation',
+                modal_title: 'Consultation',
+                prevent_delete: 0
+            };
+            if ($('#is_admin').length) {
+                json = {
+                    contexte: 'modification_sans_mdp',
+                    modal_title: 'Consultation / Modification',
+                    prevent_delete: 0
+                };
+            }
+            json['user_values'] = $.parseJSON(data);
+            displayModalPersonne(json);
+        }
+    });
+
+}
 
 $('body').on('click', '.badge', function (e) {
     if (e.target.className == 'remove_badge') {

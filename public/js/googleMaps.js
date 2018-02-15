@@ -1,8 +1,15 @@
+function addListenersMapsMarkers(markers) {
+    $.each(markers, function(indice, marker) {
+        marker.addListener('click', function () {
+            modalClicList($(this)[0]['data_id']);
+        });
+    });
+}
+
 function initMap() {
     var config_google_maps = {
         center: {lat: 47.351861, lng: 0.6613099},
         zoom: 7,
-        clickableIcons: false,
         fullscreenControl: false,
         streetViewControl: false
     };
@@ -19,7 +26,6 @@ function initMap() {
                     },
                 success: function (data) {
                     var json = JSON.parse(data);
-                    console.log(json);
                     var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
                     var markers = [];
                     var index = 0;
@@ -29,6 +35,7 @@ function initMap() {
                                 lat: parseFloat(values['lat_entreprise']),
                                 lng: parseFloat(values['lon_entreprise'])
                             },
+                            data_id: id
                             //label: labels[index % labels.length]
                         }));
                         index++;
@@ -36,6 +43,8 @@ function initMap() {
 
                     var map = new google.maps.Map(document.getElementById('map'), config_google_maps);
                     var markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
+                    addListenersMapsMarkers(markers);
                 }
             });
         } else {
@@ -57,6 +66,7 @@ function initMap() {
                                 lat: parseFloat(values['lat_entreprise']),
                                 lng: parseFloat(values['lon_entreprise'])
                             },
+                            data_id: id
                             //label: labels[index % labels.length]
                         }));
                         index++;
@@ -64,6 +74,8 @@ function initMap() {
 
                     var map = new google.maps.Map(document.getElementById('map'), config_google_maps);
                     var markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
+                    addListenersMapsMarkers(markers);
                 }
             });
         }
