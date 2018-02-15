@@ -31,7 +31,7 @@ class compModelDb
     /* retourne les dix compétences les plus recensées en base */
     public function getMostUsed(){
         $stmt = $this->db->prepare("SELECT id_competence, competence.nom, count(*) AS nb  FROM groupe_wittgenstein.lien_personne_comptence, competence  WHERE competence.id = id_competence GROUP BY id_competence
-             ORDER BY nb LIMIT 10"); 
+             ORDER BY nb DESC LIMIT 10");
              $stmt->execute();
         $competences = [];
         foreach ($stmt as $p) {
