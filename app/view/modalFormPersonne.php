@@ -228,6 +228,19 @@
                 </div>
                 <div class="row">
                     <div class="md-form col-lg-6">
+                        <input type="password" id="password" name="password" class="form-control" value="">
+                        <label for="password" class="">Mot de passe</label>
+                    </div>
+                    <div class="md-form col-lg-6">
+                        <input type="password" id="password_verif" name="password_verif" class="form-control" value="">
+                        <label for="password_verif" class="">Vérification du mot de passe</label>
+                        <div class="invalid-feedback">
+                            Le mot de passe doit être identique.
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="md-form col-lg-6">
                         <input type="text" id="telephone" name="telephone" class="form-control" value="<?= $_POST['user_values']['telephone'];?>">
                         <label for="telephone" class="<?php if(strlen($_POST['user_values']['telephone'])) {echo 'active';} ?>">Téléphone</label>
                     </div>
@@ -280,7 +293,6 @@
                 <?php if ( ! $_POST['prevent_delete']): ?>
                     <input type="button" id="deletePersonne" class="btn btn-danger" data-id="<?= $_POST['user_values']['id'];?>" value="Supprimer le profil">
                 <?php endif; ?>
-                <input type="button" id="newPasswordPersonne" class="btn btn-warning" data-id="<?= $_POST['user_values']['id'];?>" value="Envoyer un nouveau mot de passe">
                 <input type="submit" name="envoyer" id="submitModifyPersonne" class="btn btn-success" value="Modifier le profil">
             </div>
         </form>
