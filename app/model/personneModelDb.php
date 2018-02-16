@@ -72,12 +72,13 @@ class personneModelDb
     public function add($newPersonne) {
         $request = ("INSERT INTO personne (nom, prenom, email, password, active, compte_admin, never_connected)  VALUES (:nom, :prenom, :email, :password, 1, 0, 1)");
         $stmt = $this->db->prepare($request);
-        return $stmt->execute([
+        $stmt->execute([
             'nom' => $newPersonne['nom'],
             'prenom' => $newPersonne['prenom'],
             'email' => $newPersonne['email'],
             'password' => $newPersonne['password']
         ]);
+        return $this->db->lastInsertId();
     }
 
     public function delete($id) {

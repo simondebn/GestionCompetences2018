@@ -133,25 +133,27 @@ $('body').on('click', '.badge', function (e) {
 });
 
 if ($('#open_modal').length) {
-    $(this).remove();
-    $.ajax({
-        url: 'main',
-        type: 'POST',
-        data: {
-            myFunction: 'modalModifyPersonne',
-            user_id: ''
-        },
-        success: function(data) {
-            let json = {
-                contexte: 'first_connexion',
-                modal_title: 'Première Connexion',
-                user_values: $.parseJSON(data),
-                prevent_delete: 0
-            };
-            if ($('#is_admin').length) {
-                json['prevent_delete'] = 1;
+    if ( ! window.location.pathname.includes('/recherche')) {
+        $(this).remove();
+        $.ajax({
+            url: 'main',
+            type: 'POST',
+            data: {
+                myFunction: 'modalModifyPersonne',
+                user_id: ''
+            },
+            success: function (data) {
+                let json = {
+                    contexte: 'first_connexion',
+                    modal_title: 'Première Connexion',
+                    user_values: $.parseJSON(data),
+                    prevent_delete: 0
+                };
+                if ($('#is_admin').length) {
+                    json['prevent_delete'] = 1;
+                }
+                displayModalPersonne(json);
             }
-            displayModalPersonne(json);
-        }
-    });
+        });
+    }
 }

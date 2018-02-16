@@ -48,8 +48,9 @@ function addPersonne($params, $personneModelDb)
 if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'addPersonne') {
     $mdp = GenPassword(6);
     $_POST['myParams']['params']['password'] = sha1($mdp);
+    $id_ajoute = 0;
     try {
-        $personneModelDb->add($_POST['myParams']['params']);
+        $id_ajoute = $personneModelDb->add($_POST['myParams']['params']);
     } catch (PDOException $e) {
         if ($e->errorInfo[2] === "Duplicate entry 'a@b.c' for key 'email_UNIQUE'") {
             echo json_encode(array(
@@ -71,13 +72,14 @@ if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'addPersonne') {
         $message = (new Swift_Message('Création de votre compte sur la plateforme Gestion des Compétences'))
             ->setFrom(['contact@wittgenstein.fr' => 'Support Wittgenstein'])
             ->setTo([$_POST['myParams']['params']['email']])
-            ->setBody('Bienvenue sur la plateforme de gestion des compétences. Voici vos accès : identifiant : '. $_POST['myParams']['params']['email'] .'mot de passe : '. $mdp);
+            ->setBody('Bienvenue sur la plateforme de gestion des compétences. Voici vos accès : identifiant : '. $_POST['myParams']['params']['email'] .' / mot de passe : '. $mdp);
 
         $result = $mailer->send($message);
 
         echo json_encode(array(
             'type' => 'success',
             'msg' => 'Le nouvel utilicateur a été créé !',
+            'data-id' => $id_ajoute
         ));
     }
 }

@@ -210,7 +210,18 @@ $('body').on('submit', '#formAddPersonne', function(e) {
             if (msg.type === 'success') {
                 $('.modal.form').modal('hide');
                 bootstrapNotify(msg.msg, msg.type);
-                location.reload();
+                userList.add({
+                    nom: params['nom'],
+                    prenom: params['prenom']
+                });
+                userList.sort('nom', {order: 'asc'});
+                modifyPaginationClasses();
+                $.each($('.nom'), function(index, values) {
+                    if ($(values).html() == params['nom'] && $($(values).next()).html() == params['prenom']) {
+                        $($(values).next().next()).html('');
+                        $($(values).parent()).data('id',msg['data-id']);
+                    }
+                });
             }
             else {
                 bootstrapNotify(msg.msg, msg.type);
@@ -331,6 +342,15 @@ $('body').on('focusout', '#password_verif', function(e) {
     }
 });
 
+$('body').on('focusout', '#password_page_reset2', function(e) {
+    if ($('#password_page_reset')[0]['value'] !== $('#password_page_reset2')[0]['value']) {
+        $('#password_page_reset2').addClass('is-invalid');
+    } else {
+        $('#password_page_reset2').removeClass('is-invalid').addClass('is-valid');
+        $('#password_page_reset').addClass('is-valid');
+    }
+});
+
 /***********Scripts Listes***************/
 
 /**
@@ -357,16 +377,18 @@ $('body').on('click', 'th', function () {
 /** Liste Users **/
 
 let user_options = {
-  valueNames: [ 'nom', 'prenom' ],
-        page: 15,
-        pagination: [{
-            innerWindow: 1,
-            outerWindow: 1
-        }]
+    valueNames: [ 'nom', 'prenom' ],
+    page: 15,
+    pagination: [{
+        innerWindow: 1,
+        outerWindow: 1
+    }]
 },
 
 userList = new List('users', user_options);
-
+if (userList.items.length) {
+    userList.sort('nom', {order: 'asc'});
+}
 /** Liste compétences **/
 
 let comp_options = {

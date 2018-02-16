@@ -17,7 +17,7 @@ if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'resetPassword') {
     $message = (new Swift_Message('Réinitialisation de votre mot de passe !'))
         ->setFrom(['contact@wittgenstein.fr' => 'Support Wittgenstein'])
         ->setTo([$_POST['myParams']])
-        ->setBody('lien : http://localhost:4567/GestionCompetences2018/reset-'.$cle);
+        ->setBody('Si vous n\'êtes pas à l\'origine de cette demande, merci d\'ignorer ce mail / lien pour réinitialiser votre mot de passe : http://localhost:4567/GestionCompetences2018/reset-'.$cle);
 
     // Send the message
     $result = $mailer->send($message);

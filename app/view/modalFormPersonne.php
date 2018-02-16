@@ -96,7 +96,7 @@
                         <input type="text" id="ville_entreprise" name="ville_entreprise" class="form-control" value="<?= $_POST['user_values']['ville_entreprise'];?>">
                         <label for="ville_entreprise" class="<?php if(strlen($_POST['user_values']['ville_entreprise'])) {echo 'active';} ?>">Ville</label>
                         <div class="invalid-feedback">
-                            Erreur de saisie.
+                            Indiquez une ville
                         </div>
                     </div>
                 </div>

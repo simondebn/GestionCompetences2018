@@ -13,3 +13,7 @@ $site_pages = [
     'map' => 'map',
     'reset' => 'reset',
 ];
+
+if (isset($_SESSION['compte_admin']) && ! $_SESSION['compte_admin']) {
+    $site_pages['competences'] = 'main';
+}

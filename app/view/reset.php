@@ -26,6 +26,9 @@
                 <i class="fa fa-lock prefix grey-text"></i>
                 <input type="password" id="password_page_reset2" name="password_page_reset2" class="form-control" value="">
                 <label for="password_page_reset2">votre mot de passe <i>(vérification)</i></label>
+                <div class="invalid-feedback">
+                    Le mot de passe doit être identique.
+                </div>
             </div>
 
             <div class="text-center">

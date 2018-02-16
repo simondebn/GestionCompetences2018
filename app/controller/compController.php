@@ -46,13 +46,13 @@ else if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'deleteCompeten
     }
 }
 
-else{
-render('competences',[
-    'title' => 'Liste des compétences',
-    'skill_liste' => $liste,
-    'comp_model' => $compModelDb,
-    'tags' => $competences
-]);
+else if (isset($_SESSION['compte_admin']) && $_SESSION['compte_admin']) {
+    render('competences',[
+        'title' => 'Liste des compétences',
+        'skill_liste' => $liste,
+        'comp_model' => $compModelDb,
+        'tags' => $competences
+    ]);
 }
 
 
