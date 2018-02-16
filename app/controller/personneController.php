@@ -52,7 +52,7 @@ if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'addPersonne') {
     try {
         $id_ajoute = $personneModelDb->add($_POST['myParams']['params']);
     } catch (PDOException $e) {
-        if ($e->errorInfo[2] === "Duplicate entry 'a@b.c' for key 'email_UNIQUE'") {
+        if (preg_match("#Duplicate entry '.*?' for key 'email_UNIQUE'#",$e->errorInfo[2])) {
             echo json_encode(array(
                 'type' => 'danger',
                 'msg' => 'Cet email est déjà enregistré dans la base de données'
@@ -101,7 +101,6 @@ if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'deletePersonne') {
             'msg' => 'Une erreur est survenue !'
         ));
         $error = true;
-
     }
     if ($error === false) {
         echo json_encode(array(
@@ -122,10 +121,17 @@ if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'modifyPersonneNewPa
     try {
         $personneModelDb->modifyNewPassword($_POST['myParams']['params']);
     }catch (PDOException $e) {
-        echo json_encode(array(
-            'type' => 'danger',
-            'msg' => 'Une erreur est survenue !'
-        ));
+        if (preg_match("#Duplicate entry '.*?' for key 'email_UNIQUE'#",$e->errorInfo[2])) {
+            echo json_encode(array(
+                'type' => 'danger',
+                'msg' => 'Cet email est déjà enregistré dans la base de données'
+            ));
+        } else {
+            echo json_encode(array(
+                'type' => 'danger',
+                'msg' => 'Une erreur est survenue !'
+            ));
+        }
         $error = true;
     }
     if ($error === false) {
@@ -141,10 +147,17 @@ if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'modifyPersonneKeepP
     try {
         $personneModelDb->modifyKeepPassword($_POST['myParams']['params']);
     }catch (PDOException $e) {
-        echo json_encode(array(
-            'type' => 'danger',
-            'msg' => 'Une erreur est survenue !'
-        ));
+        if (preg_match("#Duplicate entry '.*?' for key 'email_UNIQUE'#",$e->errorInfo[2])) {
+            echo json_encode(array(
+                'type' => 'danger',
+                'msg' => 'Cet email est déjà enregistré dans la base de données'
+            ));
+        } else {
+            echo json_encode(array(
+                'type' => 'danger',
+                'msg' => 'Une erreur est survenue !'
+            ));
+        }
         $error = true;
     }
     if ($error === false) {
