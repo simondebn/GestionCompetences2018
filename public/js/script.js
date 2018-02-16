@@ -117,23 +117,24 @@ $('body').on('click', '#deconnexion', function (e) {
 });
 
 $('body').on('click', '#deleteSkill', function(){
-    //console.log($(this).data('id'));
+    let competence = $(this).parent().siblings('.competence').children('a')[0]['outerHTML'];
     $.ajax({url: 'competences',
-            type: 'POST',
-            data: {
-                myFunction: 'deleteCompetence',
-                id: $(this).data('id')
-            },
-            success: function (data) {
-                //console.log(data);
-                let msg = $.parseJSON(data);
-                if (msg.type == 'success') {
-                    bootstrapNotify(msg.msg, msg.type);
-                }
-                else {
-                    bootstrapNotify(msg.msg, msg.type);
-                }
-            }});
+        type: 'POST',
+        data: {
+            myFunction: 'deleteCompetence',
+            id: $(this).data('id')
+        },
+        success: function (data) {
+            let msg = $.parseJSON(data);
+            if (msg.type == 'success') {
+                bootstrapNotify(msg.msg, msg.type);
+                compList.remove('competence',competence);
+            }
+            else {
+                bootstrapNotify(msg.msg, msg.type);
+            }
+        }
+    });
 });
 
 $('body').on('click', '#newPasswordPersonne', function(e) {
@@ -188,7 +189,6 @@ $('body').on('click', '#deletePersonne', function(e) {
 });
 
 $('body').on('submit', '#formAddPersonne', function(e) {
-    // TODO gestion du formulaire à corriger : lorsqu'il y a une erreur (champ required non rempli) le formulaire ce vide !!
     e.preventDefault();
 
     let params = {};

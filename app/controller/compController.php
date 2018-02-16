@@ -33,7 +33,7 @@ else if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'deleteCompeten
     } catch (PDOException $e) {
         echo json_encode(array(
             'type' => 'danger',
-            'msg' => $e
+            'msg' => 'Une erreur est survenue !'
         ));
         $error = true;
 

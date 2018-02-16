@@ -101,11 +101,11 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="md-form col-8">
+                    <div class="md-form col-md-8">
                         <input type="text" id="competences" name="competences" class="form-control" value="">
                         <label for="competences" class="active">Competences</label>
                     </div>
-                    <div class="md-form col-4">
+                    <div class="md-form col-md-4">
                         <input type="button" id="addCompetenceForm" class="btn btn-success" value="Ajouter">
                     </div>
                 </div>
@@ -175,11 +175,11 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="md-form col-8">
+                    <div class="md-form col-md-8">
                         <input type="text" id="competences" name="competences" class="form-control" value="">
                         <label for="competences" class="active">Competences</label>
                     </div>
-                    <div class="md-form col-4">
+                    <div class="md-form col-md-4">
                         <input type="button" id="addCompetenceForm" class="btn btn-success" value="Ajouter">
                     </div>
                 </div>
@@ -263,11 +263,11 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="md-form col-8">
+                    <div class="md-form col-md-8">
                         <input type="text" id="competences" name="competences" class="form-control" value="">
                         <label for="competences" class="active">Competences</label>
                     </div>
-                    <div class="md-form col-4">
+                    <div class="md-form col-md-4">
                         <input type="button" id="addCompetenceForm" class="btn btn-success" value="Ajouter">
                     </div>
                 </div>
