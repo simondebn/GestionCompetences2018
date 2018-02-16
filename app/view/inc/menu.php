@@ -11,7 +11,7 @@
             <div class="collapse navbar-collapse ml-lg-perso" id="navbarSupportedContent">
                 <!-- Search form -->
                 <form class="form-inline md-form mr-auto mb-1" id="form_search">
-                    <input class="form-control w-75 mr-3" type="text" placeholder="Rechercher" aria-label="Search" id="search">
+                    <input class="form-control w-75 mr-3" type="text" placeholder="Rechercher" aria-label="Search" id="search" value="<?php if (isset($recherche)) {echo $recherche;} ?>">
                     <i class="fa fa-search text-white" aria-hidden="true" id="search_button"></i>
                 </form>
                 <ul class="navbar-nav">

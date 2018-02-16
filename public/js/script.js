@@ -70,10 +70,18 @@ $('body').on('click', '#connexion', function (e) {
             }
             else {
                 bootstrapNotify(msg.msg, msg.type);
+                $('#password').addClass('is-invalid');
+                $('#email').addClass('is-invalid');
             }
         }
     });
+});
 
+$('body').on('change', '#password, #email', function(e) {
+   if ($(this).hasClass('is-invalid')) {
+       $('#password').removeClass('is-invalid');
+       $('#email').removeClass('is-invalid');
+   }
 });
 
 $('body').on('submit', '#form_search', function (e) {
