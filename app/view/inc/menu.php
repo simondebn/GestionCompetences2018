@@ -3,7 +3,7 @@
     <?php if(isset($_SESSION['user_id'])): ?>
 
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-cefim scrolling-navbar">
-            <a class="navbar-brand" href="main"><strong>CEFIM</strong></a>
+            <a class="navbar-brand" href="main"><img src="public/img/logoWittgenSkills.png" height="35" class="d-inline-block align-top ml-3" alt=""> </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -11,7 +11,7 @@
             <div class="collapse navbar-collapse ml-lg-perso" id="navbarSupportedContent">
                 <!-- Search form -->
                 <form class="form-inline md-form mr-auto mb-1" id="form_search">
-                    <input class="form-control w-75 mr-3" type="text" placeholder="Rechercher" aria-label="Search" id="search" value="<?php if (isset($recherche)) {echo $recherche;} ?>">
+                    <input class="form-control w-75 mr-3 ml-3" type="text" placeholder="Rechercher" aria-label="Search" id="search" value="<?php if (isset($recherche)) {echo $recherche;} ?>">
                     <i class="fa fa-search text-white" aria-hidden="true" id="search_button"></i>
                 </form>
                 <ul class="navbar-nav">
