@@ -18,8 +18,8 @@ if (isset($_POST['myFunction']) && $_POST['myFunction'] === 'checkConnexion') {
         ));
     } else {
         echo json_encode(array(
-            'type' => 'error',
-            'msg' => 'Une erreur est survenue !'
+            'type' => 'danger',
+            'msg' => 'Votre identifiant ou votre mot de passe est incorrect'
         ));
     }
 }
