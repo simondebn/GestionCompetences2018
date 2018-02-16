@@ -14,7 +14,7 @@ Via Git :
 `git clone https://github.com/simondebn/GestionCompetences2018.git`
 
 #### Database
-In the config folder you will find the `import.sql` file in order to create the MySql database along with the `db.php` that you will need to fill in order to connect to the database.
+In the `config` folder you will find the `schema_db.sql` file in order to create the MySql database along with the `db_default.php` which you will need to rename and that you will need to fill in order to use the database.
 
 ## Requirements
 
@@ -53,7 +53,7 @@ Via Git :
 `git clone https://github.com/simondebn/GestionCompetences2018.git`
 
 #### Base de données
-Dans le dossier `config` vous trouverez le fichier `import.sql` permettant de créer la base MySql ainsi qu'un fichier  `db.php` que vous devrez remplir afin de vous connecter à la base de données. 
+Dans le dossier `config` vous trouverez le fichier `schema_db.sql` permettant de créer la base MySql ainsi qu'un fichier  `db_default.php` dont vous devrez modifier le nom et que vous devrez remplirafin d'utiliser la base de données. 
 
 ## Configuration Requise
 
