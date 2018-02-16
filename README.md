@@ -35,6 +35,7 @@ All dependencies are bundled in the project. However, you can find them all belo
   * [Javascript autocomplete](https://github.com/Pixabay/JavaScript-autoComplete) v1.0.4
   * [Composer](https://getcomposer.org/) v1.6.3
   * [Swift Mailer](https://swiftmailer.symfony.com/) v6.0.2
+  * [Google Map API](https://developers.google.com/maps/web/?hl=fr)
   
 
 # WittgenSkills (FR)
@@ -53,7 +54,7 @@ Via Git :
 `git clone https://github.com/simondebn/GestionCompetences2018.git`
 
 #### Base de données
-Dans le dossier `config` vous trouverez le fichier `schema_db.sql` permettant de créer la base MySql ainsi qu'un fichier  `db_default.php` dont vous devrez modifier le nom et que vous devrez remplirafin d'utiliser la base de données. 
+Dans le dossier `config` vous trouverez le fichier `schema_db.sql` permettant de créer la base MySql ainsi qu'un fichier  `db_default.php` dont vous devrez modifier le nom et que vous devrez remplir afin d'utiliser la base de données. 
 
 ## Configuration Requise
 
@@ -75,4 +76,5 @@ Toutes les dépendances nécessaires sont inclues dans le projet. Cependant vous
   * [Javascript autocomplete](https://github.com/Pixabay/JavaScript-autoComplete) v1.0.4
   * [Composer](https://getcomposer.org/) v1.6.3
   * [Swift Mailer](https://swiftmailer.symfony.com/) v6.0.2
+  * [Google Map API](https://developers.google.com/maps/web/?hl=fr)
   
